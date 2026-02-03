@@ -102,9 +102,11 @@ install_file "docs-guidelines.md" ~/.claude/docs-guidelines.md "Documentation gu
 install_file ".markdownlintrc" ~/.claude/.markdownlintrc "Markdownlint configuration"
 install_file "docs.md" ~/.claude/commands/docs.md "Documentation command"
 install_file "lint.sh" ~/.claude/lint.sh "Markdown linter script"
+install_file "release-note.sh" ~/.claude/release-note.sh "Release note generator"
 
-# Make lint.sh executable
+# Make scripts executable
 chmod +x ~/.claude/lint.sh 2>/dev/null || true
+chmod +x ~/.claude/release-note.sh 2>/dev/null || true
 
 echo ""
 echo -e "${GREEN}✅ Claude Code Documentation Standards installed successfully!${NC}"
@@ -116,6 +118,8 @@ echo "   /docs validate                  - Validate documentation structure"
 echo "   /docs update-toc                - Update all README.md TOCs"
 echo "   /docs health                    - Generate documentation health report"
 echo "   /docs scaffold <type>           - Scaffold from template"
+echo "   /docs release-note              - Generate release note from git log"
+echo "   /docs release-note --tldr       - TLDR release note"
 echo ""
 echo "📋 Guidelines Location:"
 echo "   ~/.claude/docs-guidelines.md"

@@ -84,6 +84,9 @@ flowchart LR
 | `/docs update-toc` | Regenerate all README.md table of contents |
 | `/docs health` | Generate documentation health report |
 | `/docs scaffold <type>` | Scaffold from template: `laravel`, `api`, `cli`, `sdk`, `fullstack` |
+| `/docs release-note` | Generate full release note from today's git log |
+| `/docs release-note --tldr` | Generate TLDR release note from today's git log |
+| `/docs release-note --since <date>` | Release note from a specific date range |
 
 ## Task Modes
 
@@ -95,6 +98,7 @@ flowchart LR
 | Validate | Check docs against standards + lint | Before commits / CI |
 | Health Report | Quantitative documentation quality assessment | On demand / periodic review |
 | Scaffold | Generate structure from project type template | Quick setup for known project types |
+| Release Note | Generate release notes from git log | Before release / end of day |
 
 ### Create New Documentation Structure
 
@@ -144,6 +148,44 @@ flowchart LR
 2. Generate the matching directory structure and README.md files from the template.
 3. Pre-populate context folder READMEs with placeholder content.
 4. Run linter on generated files.
+
+### Generate Release Note
+
+Generate release notes from the current repo's git log. Uses `~/.claude/release-note.sh`.
+
+```mermaid
+flowchart LR
+    A[Git Log] --> B{Mode?}
+    B -->|Full| C[Categorized Sections\nSummary Table\nContributors\nFiles Changed]
+    B -->|TLDR| D[One-liner Stats\nKey Changes Only]
+    C --> E[Markdown Output]
+    D --> E
+```
+
+**Full mode** generates a comprehensive release note with:
+
+| Section | Content |
+|---------|---------|
+| Summary | Commit count, files changed, contributors table |
+| New Features | Commits matching `feat`, `add`, `new` prefixes |
+| Bug Fixes | Commits matching `fix`, `bug`, `patch` prefixes |
+| Documentation | Commits matching `docs` prefix |
+| Refactoring | Commits matching `refactor`, `clean`, `improve` prefixes |
+| Maintenance | Commits matching `chore`, `build`, `ci`, `deps` prefixes |
+| Other Changes | All remaining commits |
+| Contributors | List of authors |
+| Files Changed | Top 20 most-changed files with frequency |
+
+**TLDR mode** generates a short summary with commit stats and key changes only.
+
+| Command | Description |
+|---------|-------------|
+| `~/.claude/release-note.sh` | Full release note, today's commits |
+| `~/.claude/release-note.sh --tldr` | TLDR version, today's commits |
+| `~/.claude/release-note.sh --since yesterday` | Since yesterday |
+| `~/.claude/release-note.sh --since "1 week ago"` | Since last week |
+| `~/.claude/release-note.sh --output RELEASE.md` | Write to file |
+| `~/.claude/release-note.sh --tldr --output RELEASE.md` | TLDR to file |
 
 ---
 

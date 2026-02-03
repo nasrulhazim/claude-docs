@@ -75,6 +75,7 @@ The installer copies these files to your `~/.claude` directory:
 | `.markdownlintrc` | `~/.claude/` | Markdown linting rules |
 | `docs.md` | `~/.claude/commands/` | `/docs` slash command |
 | `lint.sh` | `~/.claude/` | Batch markdown linter script |
+| `release-note.sh` | `~/.claude/` | Release note generator from git log |
 | `markdownlint-cli` | Global npm | Markdown linter (if npm available) |
 
 ## Usage
@@ -105,6 +106,8 @@ Claude will:
 | `/docs update-toc` | Update all README.md TOCs |
 | `/docs health` | Generate documentation health report |
 | `/docs scaffold <type>` | Scaffold from template: `laravel`, `api`, `cli`, `sdk`, `fullstack` |
+| `/docs release-note` | Generate full release note from today's git log |
+| `/docs release-note --tldr` | Generate TLDR release note |
 
 ### Linting
 
@@ -119,6 +122,22 @@ Use the included `lint.sh` script to lint all markdown files at once:
 | Lint current directory | `~/.claude/lint.sh .` |
 
 The script auto-detects `.markdownlintrc` config (local first, then `~/.claude/`), finds all `.md` files recursively, and lints them in one pass.
+
+### Release Notes
+
+Generate release notes from the current repo's git log:
+
+| Action | Command |
+|--------|---------|
+| Full release note (today) | `~/.claude/release-note.sh` |
+| TLDR version (today) | `~/.claude/release-note.sh --tldr` |
+| Since yesterday | `~/.claude/release-note.sh --since yesterday` |
+| Since specific date | `~/.claude/release-note.sh --since "2025-12-01"` |
+| Since last week | `~/.claude/release-note.sh --since "1 week ago"` |
+| Write to file | `~/.claude/release-note.sh --output RELEASE.md` |
+| TLDR to file | `~/.claude/release-note.sh --tldr -o RELEASE.md` |
+
+The script auto-categorizes commits by conventional commit prefixes (`feat`, `fix`, `docs`, `refactor`, `chore`, etc.) and generates markdown with summary tables, contributor lists, and file change stats.
 
 ## Documentation Structure
 
