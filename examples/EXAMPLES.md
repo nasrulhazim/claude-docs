@@ -6,163 +6,230 @@ This document provides real-world examples of documentation structures using the
 
 Perfect for Laravel packages and libraries.
 
-```text
-docs/
-├── README.md                           # Main index
-├── 01-getting-started/
-│   ├── README.md                       # Getting started TOC
-│   ├── 01-installation.md              # Installation guide
-│   ├── 02-quick-start.md               # 5-minute quickstart
-│   └── 03-configuration.md             # Basic configuration
-├── 02-features/
-│   ├── README.md                       # Features TOC
-│   ├── 01-overview.md                  # All features overview
-│   ├── 02-trait-uuid.md                # UUID trait
-│   ├── 03-trait-token.md               # Token trait
-│   └── 04-trait-slug.md                # Slug trait
-├── 03-advanced/
-│   ├── README.md                       # Advanced TOC
-│   ├── 01-custom-generators.md         # Custom generators
-│   └── 02-extending.md                 # Extending functionality
-└── 04-api-reference/
-    ├── README.md                       # API reference TOC
-    ├── 01-classes.md                   # Class reference
-    └── 02-methods.md                   # Method reference
-README.md                                # Project overview
+```mermaid
+graph TD
+    root["docs/"]
+    root --> readme["README.md - Main index"]
+    root --> gs["01-getting-started/"]
+    root --> feat["02-features/"]
+    root --> adv["03-advanced/"]
+    root --> api["04-api-reference/"]
+    root --> decisions["08-decisions/"]
+
+    gs --> gs_r["README.md"]
+    gs --> gs_01["01-installation.md"]
+    gs --> gs_02["02-quick-start.md"]
+    gs --> gs_03["03-configuration.md"]
+
+    feat --> feat_r["README.md"]
+    feat --> feat_01["01-overview.md"]
+    feat --> feat_02["02-trait-uuid.md"]
+    feat --> feat_03["03-trait-token.md"]
+    feat --> feat_04["04-trait-slug.md"]
+
+    adv --> adv_r["README.md"]
+    adv --> adv_01["01-custom-generators.md"]
+    adv --> adv_02["02-extending.md"]
+
+    api --> api_r["README.md"]
+    api --> api_01["01-classes.md"]
+    api --> api_02["02-methods.md"]
+
+    decisions --> dec_r["README.md"]
+    decisions --> dec_01["01-adr-template.md"]
+
+    project["README.md - Project overview"]
+
+    style root fill:#e1f5fe
+    style gs fill:#e8f5e9
+    style feat fill:#fff3e0
+    style adv fill:#fce4ec
+    style api fill:#f3e5f5
+    style decisions fill:#e8eaf6
 ```
 
 ## Example 2: REST API Documentation
 
 Ideal for API services and microservices.
 
-```text
-docs/
-├── README.md                           # Main index
-├── 01-getting-started/
-│   ├── README.md
-│   ├── 01-introduction.md              # What is this API?
-│   ├── 02-authentication.md            # Auth setup
-│   └── 03-first-request.md             # Making first API call
-├── 02-endpoints/
-│   ├── README.md
-│   ├── 01-users.md                     # User endpoints
-│   ├── 02-posts.md                     # Post endpoints
-│   ├── 03-comments.md                  # Comment endpoints
-│   └── 04-media.md                     # Media endpoints
-├── 03-guides/
-│   ├── README.md
-│   ├── 01-pagination.md                # Pagination guide
-│   ├── 02-filtering.md                 # Filtering results
-│   ├── 03-rate-limiting.md             # Rate limits
-│   └── 04-webhooks.md                  # Webhook setup
-└── 04-reference/
-    ├── README.md
-    ├── 01-errors.md                    # Error codes
-    ├── 02-status-codes.md              # HTTP status codes
-    └── 03-changelog.md                 # API changelog
-README.md                                # Project overview
+```mermaid
+graph TD
+    root["docs/"]
+    root --> readme["README.md - Main index"]
+    root --> gs["01-getting-started/"]
+    root --> ep["02-endpoints/"]
+    root --> guides["03-guides/"]
+    root --> ref["04-reference/"]
+
+    gs --> gs_r["README.md"]
+    gs --> gs_01["01-introduction.md"]
+    gs --> gs_02["02-authentication.md"]
+    gs --> gs_03["03-first-request.md"]
+
+    ep --> ep_r["README.md"]
+    ep --> ep_01["01-users.md"]
+    ep --> ep_02["02-posts.md"]
+    ep --> ep_03["03-comments.md"]
+    ep --> ep_04["04-media.md"]
+
+    guides --> guides_r["README.md"]
+    guides --> guides_01["01-pagination.md"]
+    guides --> guides_02["02-filtering.md"]
+    guides --> guides_03["03-rate-limiting.md"]
+    guides --> guides_04["04-webhooks.md"]
+
+    ref --> ref_r["README.md"]
+    ref --> ref_01["01-errors.md"]
+    ref --> ref_02["02-status-codes.md"]
+    ref --> ref_03["03-changelog.md"]
+
+    project["README.md - Project overview"]
+
+    style root fill:#e1f5fe
+    style gs fill:#e8f5e9
+    style ep fill:#fff3e0
+    style guides fill:#fce4ec
+    style ref fill:#f3e5f5
 ```
 
 ## Example 3: Full-Stack Application
 
 Comprehensive documentation for complex applications.
 
-```text
-docs/
-├── README.md                           # Main index
-├── 01-architecture/
-│   ├── README.md
-│   ├── 01-overview.md                  # System architecture
-│   ├── 02-frontend.md                  # Frontend architecture
-│   ├── 03-backend.md                   # Backend architecture
-│   └── 04-database.md                  # Database design
-├── 02-development/
-│   ├── README.md
-│   ├── 01-getting-started.md           # Dev environment setup
-│   ├── 02-coding-standards.md          # Code style guide
-│   ├── 03-git-workflow.md              # Git branching strategy
-│   └── 04-testing.md                   # Testing guide
-├── 03-deployment/
-│   ├── README.md
-│   ├── 01-environments.md              # Dev, staging, prod
-│   ├── 02-docker.md                    # Docker setup
-│   ├── 03-ci-cd.md                     # CI/CD pipeline
-│   └── 04-monitoring.md                # Monitoring & logging
-├── 04-features/
-│   ├── README.md
-│   ├── 01-authentication.md            # Auth system
-│   ├── 02-user-management.md           # User features
-│   ├── 03-notifications.md             # Notification system
-│   └── 04-payments.md                  # Payment integration
-└── 05-troubleshooting/
-    ├── README.md
-    ├── 01-common-issues.md             # Common problems
-    ├── 02-debugging.md                 # Debugging guide
-    └── 03-faq.md                       # FAQ
-README.md                                # Project overview
+```mermaid
+graph TD
+    root["docs/"]
+    root --> readme["README.md - Main index"]
+    root --> arch["01-architecture/"]
+    root --> dev["02-development/"]
+    root --> deploy["03-deployment/"]
+    root --> feat["04-features/"]
+    root --> trouble["05-troubleshooting/"]
+
+    arch --> arch_r["README.md"]
+    arch --> arch_01["01-overview.md"]
+    arch --> arch_02["02-frontend.md"]
+    arch --> arch_03["03-backend.md"]
+    arch --> arch_04["04-database.md"]
+
+    dev --> dev_r["README.md"]
+    dev --> dev_01["01-getting-started.md"]
+    dev --> dev_02["02-coding-standards.md"]
+    dev --> dev_03["03-git-workflow.md"]
+    dev --> dev_04["04-testing.md"]
+
+    deploy --> deploy_r["README.md"]
+    deploy --> deploy_01["01-environments.md"]
+    deploy --> deploy_02["02-docker.md"]
+    deploy --> deploy_03["03-ci-cd.md"]
+    deploy --> deploy_04["04-monitoring.md"]
+
+    feat --> feat_r["README.md"]
+    feat --> feat_01["01-authentication.md"]
+    feat --> feat_02["02-user-management.md"]
+    feat --> feat_03["03-notifications.md"]
+    feat --> feat_04["04-payments.md"]
+
+    trouble --> trouble_r["README.md"]
+    trouble --> trouble_01["01-common-issues.md"]
+    trouble --> trouble_02["02-debugging.md"]
+    trouble --> trouble_03["03-faq.md"]
+
+    project["README.md - Project overview"]
+
+    style root fill:#e1f5fe
+    style arch fill:#e8f5e9
+    style dev fill:#fff3e0
+    style deploy fill:#fce4ec
+    style feat fill:#f3e5f5
+    style trouble fill:#fff9c4
 ```
 
 ## Example 4: CLI Tool
 
 Documentation for command-line tools.
 
-```text
-docs/
-├── README.md                           # Main index
-├── 01-installation/
-│   ├── README.md
-│   ├── 01-requirements.md              # System requirements
-│   ├── 02-install.md                   # Installation steps
-│   └── 03-configuration.md             # Initial setup
-├── 02-usage/
-│   ├── README.md
-│   ├── 01-basic-commands.md            # Common commands
-│   ├── 02-advanced-usage.md            # Advanced features
-│   └── 03-examples.md                  # Real-world examples
-├── 03-commands/
-│   ├── README.md
-│   ├── 01-init.md                      # init command
-│   ├── 02-build.md                     # build command
-│   ├── 03-deploy.md                    # deploy command
-│   └── 04-config.md                    # config command
-└── 04-reference/
-    ├── README.md
-    ├── 01-flags.md                     # Command flags
-    ├── 02-environment.md               # Environment variables
-    └── 03-config-file.md               # Config file reference
-README.md                                # Project overview
+```mermaid
+graph TD
+    root["docs/"]
+    root --> readme["README.md - Main index"]
+    root --> install["01-installation/"]
+    root --> usage["02-usage/"]
+    root --> cmds["03-commands/"]
+    root --> ref["04-reference/"]
+
+    install --> install_r["README.md"]
+    install --> install_01["01-requirements.md"]
+    install --> install_02["02-install.md"]
+    install --> install_03["03-configuration.md"]
+
+    usage --> usage_r["README.md"]
+    usage --> usage_01["01-basic-commands.md"]
+    usage --> usage_02["02-advanced-usage.md"]
+    usage --> usage_03["03-examples.md"]
+
+    cmds --> cmds_r["README.md"]
+    cmds --> cmds_01["01-init.md"]
+    cmds --> cmds_02["02-build.md"]
+    cmds --> cmds_03["03-deploy.md"]
+    cmds --> cmds_04["04-config.md"]
+
+    ref --> ref_r["README.md"]
+    ref --> ref_01["01-flags.md"]
+    ref --> ref_02["02-environment.md"]
+    ref --> ref_03["03-config-file.md"]
+
+    project["README.md - Project overview"]
+
+    style root fill:#e1f5fe
+    style install fill:#e8f5e9
+    style usage fill:#fff3e0
+    style cmds fill:#fce4ec
+    style ref fill:#f3e5f5
 ```
 
 ## Example 5: Library/SDK
 
 Documentation for SDKs and libraries.
 
-```text
-docs/
-├── README.md                           # Main index
-├── 01-introduction/
-│   ├── README.md
-│   ├── 01-overview.md                  # What is this library?
-│   ├── 02-installation.md              # Installation
-│   └── 03-quick-start.md               # Quick start guide
-├── 02-guides/
-│   ├── README.md
-│   ├── 01-authentication.md            # Auth guide
-│   ├── 02-making-requests.md           # Making API calls
-│   ├── 03-handling-responses.md        # Response handling
-│   └── 04-error-handling.md            # Error handling
-├── 03-api-reference/
-│   ├── README.md
-│   ├── 01-client.md                    # Client class
-│   ├── 02-resources.md                 # Resource classes
-│   ├── 03-models.md                    # Model classes
-│   └── 04-exceptions.md                # Exception classes
-└── 04-advanced/
-    ├── README.md
-    ├── 01-customization.md             # Customizing behavior
-    ├── 02-plugins.md                   # Plugin system
-    └── 03-testing.md                   # Testing with SDK
-README.md                                # Project overview
+```mermaid
+graph TD
+    root["docs/"]
+    root --> readme["README.md - Main index"]
+    root --> intro["01-introduction/"]
+    root --> guides["02-guides/"]
+    root --> api["03-api-reference/"]
+    root --> adv["04-advanced/"]
+
+    intro --> intro_r["README.md"]
+    intro --> intro_01["01-overview.md"]
+    intro --> intro_02["02-installation.md"]
+    intro --> intro_03["03-quick-start.md"]
+
+    guides --> guides_r["README.md"]
+    guides --> guides_01["01-authentication.md"]
+    guides --> guides_02["02-making-requests.md"]
+    guides --> guides_03["03-handling-responses.md"]
+    guides --> guides_04["04-error-handling.md"]
+
+    api --> api_r["README.md"]
+    api --> api_01["01-client.md"]
+    api --> api_02["02-resources.md"]
+    api --> api_03["03-models.md"]
+    api --> api_04["04-exceptions.md"]
+
+    adv --> adv_r["README.md"]
+    adv --> adv_01["01-customization.md"]
+    adv --> adv_02["02-plugins.md"]
+    adv --> adv_03["03-testing.md"]
+
+    project["README.md - Project overview"]
+
+    style root fill:#e1f5fe
+    style intro fill:#e8f5e9
+    style guides fill:#fff3e0
+    style api fill:#fce4ec
+    style adv fill:#f3e5f5
 ```
 
 ## Common Patterns
@@ -269,35 +336,44 @@ Troubleshooting tips if applicable.
 
 ## Tips for Choosing Structure
 
-### For Small Projects (< 10 docs)
+| Project Size | Doc Count | Recommended Structure |
+|-------------|-----------|----------------------|
+| Small | < 10 docs | Flat structure with numbered files directly in `docs/` |
+| Medium | 10-30 docs | 3-4 context folders |
+| Large | 30+ docs | 5-7+ context folders with clear separation |
 
-```text
-docs/
-├── README.md
-├── 01-getting-started.md
-├── 02-usage.md
-└── 03-api-reference.md
+### Small Project Structure
+
+```mermaid
+graph TD
+    root["docs/"]
+    root --> readme["README.md"]
+    root --> doc1["01-getting-started.md"]
+    root --> doc2["02-usage.md"]
+    root --> doc3["03-api-reference.md"]
+
+    style root fill:#e1f5fe
 ```
 
-### For Medium Projects (10-30 docs)
+### Medium Project Contexts
 
-Use 3-4 context folders:
+| Context | Purpose |
+|---------|---------|
+| `01-getting-started/` | Installation, setup, quickstart |
+| `02-guides/` | How-to guides and tutorials |
+| `03-api-reference/` | Technical reference documentation |
 
-- `01-getting-started/`
-- `02-guides/`
-- `03-api-reference/`
+### Large Project Contexts
 
-### For Large Projects (30+ docs)
-
-Use 5-7 context folders with clear separation:
-
-- `01-introduction/`
-- `02-architecture/`
-- `03-development/`
-- `04-deployment/`
-- `05-api-reference/`
-- `06-examples/`
-- `07-advanced/`
+| Context | Purpose |
+|---------|---------|
+| `01-introduction/` | Overview and onboarding |
+| `02-architecture/` | System design and decisions |
+| `03-development/` | Developer workflows and standards |
+| `04-deployment/` | Operations and infrastructure |
+| `05-api-reference/` | Technical API documentation |
+| `06-examples/` | Real-world usage examples |
+| `07-advanced/` | Deep-dive topics and optimization |
 
 ## Customizing for Your Project
 

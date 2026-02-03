@@ -10,18 +10,28 @@ Global documentation standards and tooling for Claude Code projects. This packag
 - **Progressive Detail** - Information architecture from overview to specifics
 - **Quality Assurance** - Automated validation and formatting checks
 - **CI/CD Ready** - Integration examples for GitHub Actions
+- **Project Auto-Detection** - Automatically suggests structure based on project type
+- **Health Reports** - Quantitative documentation quality assessment
+- **Architecture Decision Records** - Built-in ADR support
+- **MermaidJS Diagrams** - Visual documentation structure and workflow diagrams
 
 ## What's Included
 
-```text
-claude-docs/
-├── README.md                      # This file
-├── install.sh                     # One-command installer
-├── setup-docs-standards.sh        # Setup script
-├── docs-guidelines.md             # Full documentation standards
-├── .markdownlintrc                # Linter configuration
-├── docs.md                        # /docs slash command
-└── examples/                      # Example documentation structures
+```mermaid
+graph TD
+    root["claude-docs/"]
+    root --> readme["README.md - This file"]
+    root --> install["install.sh - One-command installer"]
+    root --> setup["setup-docs-standards.sh - Setup script"]
+    root --> guidelines["docs-guidelines.md - Full documentation standards"]
+    root --> lintrc[".markdownlintrc - Linter configuration"]
+    root --> docs["docs.md - /docs slash command"]
+    root --> examples["examples/ - Example documentation structures"]
+
+    style root fill:#e1f5fe
+    style guidelines fill:#e8f5e9
+    style docs fill:#fff3e0
+    style examples fill:#f3e5f5
 ```
 
 ## Quick Install
@@ -78,7 +88,7 @@ In any project with Claude Code:
 
 Claude will:
 
-1. Analyze your project
+1. Auto-detect your project type
 2. Create numbered documentation structure
 3. Generate README files with TOCs
 4. Automatically lint all files
@@ -86,52 +96,61 @@ Claude will:
 
 ### Available Commands
 
-```text
-/docs                    # Create new documentation structure
-/docs reorganize         # Reorganize existing docs
-/docs validate           # Validate against standards
-/docs update-toc         # Update all README.md TOCs
-```
+| Command | Description |
+|---------|-------------|
+| `/docs` | Create new documentation structure (auto-detects project type) |
+| `/docs reorganize` | Reorganize existing docs into numbered standard |
+| `/docs validate` | Validate against standards and report issues |
+| `/docs update-toc` | Update all README.md TOCs |
+| `/docs health` | Generate documentation health report |
+| `/docs scaffold <type>` | Scaffold from template: `laravel`, `api`, `cli`, `sdk`, `fullstack` |
 
 ### Manual Linting
 
 Lint your documentation manually:
 
-```bash
-# Lint all markdown files
-markdownlint docs/**/*.md
-
-# Auto-fix issues
-markdownlint --fix docs/**/*.md
-
-# Use custom config
-markdownlint --config ~/.claude/.markdownlintrc docs/**/*.md
-```
+| Action | Command |
+|--------|---------|
+| Lint all markdown files | `markdownlint docs/**/*.md` |
+| Auto-fix issues | `markdownlint --fix docs/**/*.md` |
+| Use custom config | `markdownlint --config ~/.claude/.markdownlintrc docs/**/*.md` |
 
 ## Documentation Structure
 
 The standard structure follows this pattern:
 
-```text
-docs/
-├── README.md                    # Main documentation index
-├── 01-architecture/
-│   ├── README.md               # Context TOC
-│   ├── 01-overview.md
-│   ├── 02-patterns.md
-│   └── 03-data-layer.md
-├── 02-development/
-│   ├── README.md
-│   ├── 01-getting-started.md
-│   ├── 02-workflows.md
-│   └── 03-testing.md
-├── 03-deployment/
-│   ├── README.md
-│   └── 01-overview.md
-└── 04-api/
-    ├── README.md
-    └── 01-endpoints.md
-README.md                        # Project overview
+```mermaid
+graph TD
+    root["docs/"]
+    root --> readme["README.md - Main documentation index"]
+    root --> arch["01-architecture/"]
+    root --> dev["02-development/"]
+    root --> deploy["03-deployment/"]
+    root --> api["04-api/"]
+
+    arch --> arch_r["README.md - Context TOC"]
+    arch --> arch_01["01-overview.md"]
+    arch --> arch_02["02-patterns.md"]
+    arch --> arch_03["03-data-layer.md"]
+
+    dev --> dev_r["README.md"]
+    dev --> dev_01["01-getting-started.md"]
+    dev --> dev_02["02-workflows.md"]
+    dev --> dev_03["03-testing.md"]
+
+    deploy --> deploy_r["README.md"]
+    deploy --> deploy_01["01-overview.md"]
+
+    api --> api_r["README.md"]
+    api --> api_01["01-endpoints.md"]
+
+    project["README.md - Project overview"]
+
+    style root fill:#e1f5fe
+    style arch fill:#e8f5e9
+    style dev fill:#fff3e0
+    style deploy fill:#fce4ec
+    style api fill:#f3e5f5
 ```
 
 ### Key Principles
@@ -142,22 +161,38 @@ README.md                        # Project overview
 4. **Single Source of Truth** - All docs in `docs/` directory
 5. **Self-Documenting** - Each folder has README.md with TOC
 
+### Documentation Workflow
+
+```mermaid
+flowchart LR
+    A[Write / Update] --> B[Lint]
+    B --> C{Issues?}
+    C -->|Yes| D[Fix]
+    D --> B
+    C -->|No| E[Verify & Commit]
+```
+
 ## Linting Rules
 
 The `.markdownlintrc` enforces:
 
-- ATX-style headers (`#` not underline)
-- Dash-style lists (`-` not `*` or `+`)
-- Language identifiers in code blocks
-- Single H1 per document
-- 120 character line length (prose only)
-- Consistent formatting
+| Rule | Setting | Purpose |
+|------|---------|---------|
+| MD003 | `style: atx` | ATX-style headers (`#` not underline) |
+| MD004 | `style: dash` | Dash-style lists (`-` not `*` or `+`) |
+| MD007 | `indent: 2` | 2-space indentation for lists |
+| MD013 | `line_length: 120` | 120 character line length (prose only) |
+| MD025 | enabled | Single H1 per document |
+| MD040 | enabled | Language identifiers in code blocks |
+| MD046 | `style: fenced` | Fenced code block style (backticks) |
 
 ## Requirements
 
-- **Claude Code** - Latest version
-- **Node.js & npm** - For markdownlint (optional but recommended)
-- **Git** - For cloning (manual install only)
+| Requirement | Status |
+|-------------|--------|
+| Claude Code | Latest version (required) |
+| Node.js & npm | For markdownlint (optional but recommended) |
+| Git | For cloning (manual install only) |
 
 ## CI/CD Integration
 
@@ -197,10 +232,10 @@ if [ -n "$STAGED_MD" ]; then
     markdownlint $STAGED_MD
 
     if [ $? -ne 0 ]; then
-        echo "❌ Markdown linting failed. Fix issues or use --no-verify to skip."
+        echo "Markdown linting failed. Fix issues or use --no-verify to skip."
         exit 1
     fi
-    echo "✅ Markdown linting passed!"
+    echo "Markdown linting passed!"
 fi
 ```
 
@@ -216,8 +251,9 @@ See the `examples/` directory for:
 
 - Laravel package documentation
 - API documentation structure
-- Multi-service architecture docs
-- Getting started guides
+- Full-stack application docs
+- CLI tool documentation
+- Library/SDK documentation
 
 ## Customization
 
@@ -240,21 +276,11 @@ Edit `~/.claude/docs-guidelines.md` to add your own standard contexts.
 
 ## Troubleshooting
 
-### Linter not found
-
-```bash
-npm install -g markdownlint-cli
-```
-
-### Permission issues
-
-```bash
-chmod +x ~/.claude/setup-docs-standards.sh
-```
-
-### Command not recognized
-
-Restart Claude Code after installation.
+| Problem | Solution |
+|---------|----------|
+| Linter not found | `npm install -g markdownlint-cli` |
+| Permission issues | `chmod +x ~/.claude/setup-docs-standards.sh` |
+| Command not recognized | Restart Claude Code after installation |
 
 ## Contributing
 
@@ -276,6 +302,18 @@ MIT License - see LICENSE file for details
 
 ## Changelog
 
+### v1.2.0 (2026-02-03)
+
+- Replaced all ASCII tree diagrams with MermaidJS diagrams
+- Converted all structured data to markdown table syntax
+- Added project type auto-detection
+- Added documentation health report mode
+- Added scaffold command with project type templates
+- Added Architecture Decision Records (ADR) support
+- Added frontmatter/metadata support
+- Added context relationship diagrams
+- Added progressive detail flow diagram
+
 ### v1.1.0 (2025-12-10)
 
 - Added markdown linting support
@@ -291,7 +329,3 @@ MIT License - see LICENSE file for details
 - Context-based organization
 - `/docs` slash command
 - Global documentation standards
-
----
-
-**Made with ❤️ for the Claude Code community**
