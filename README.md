@@ -1,5 +1,8 @@
 # Claude Code Documentation Standards
 
+[![Latest Version](https://img.shields.io/github/v/release/nasrulhazim/claude-docs?style=flat-square)](https://github.com/nasrulhazim/claude-docs/releases)
+[![License](https://img.shields.io/github/license/nasrulhazim/claude-docs?style=flat-square)](LICENSE)
+
 Global documentation standards and tooling for Claude Code projects. This package provides a standardized structure, linting, and automation for creating consistent, high-quality documentation.
 
 ## Features
@@ -325,6 +328,17 @@ MIT License - see LICENSE file for details
 - **Discussions**: [GitHub Discussions](https://github.com/nasrulhazim/claude-docs/discussions)
 
 ## Changelog
+
+### v1.3.0 (2026-02-03)
+
+- Added mandatory badge requirements for root README.md (Tier 1/2/3)
+- Added badge templates for 10 package registries
+  (Packagist, npm, PyPI, RubyGems, crates.io, NuGet, Maven Central, Go, Pub.dev, Hex.pm)
+- Added Project Type Badge Matrix covering 13 project types
+- Expanded project detection to support Python, Ruby, Rust, Go, .NET, Java, Dart/Flutter, Elixir
+- Added badge generation and validation steps to documentation workflow
+- Added Badge Compliance metric to health report
+- Applied badge standard to this project's own README.md
 
 ### v1.2.0 (2026-02-03)
 

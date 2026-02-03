@@ -239,6 +239,10 @@ graph TD
 ```markdown
 # Project Name
 
+[![Latest Version](https://img.shields.io/github/v/release/{owner}/{repo}?style=flat-square)](https://github.com/{owner}/{repo}/releases)
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+
 Brief description of what this project does.
 
 ## Features
@@ -332,6 +336,123 @@ Troubleshooting tips if applicable.
 
 - [Related Topic](02-related.md)
 - [Advanced Usage](../03-advanced/01-overview.md)
+```
+
+## Badge Examples by Project Type
+
+Copy-paste badge templates for common project types. Replace placeholders
+(`{owner}`, `{repo}`, `{vendor}`, `{package}`, `{workflow}`, etc.) with actual values.
+
+### PHP / Laravel Package (Packagist)
+
+```markdown
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/{vendor}/{package}?style=flat-square)](https://packagist.org/packages/{vendor}/{package})
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+[![Total Downloads](https://img.shields.io/packagist/dt/{vendor}/{package}?style=flat-square)](https://packagist.org/packages/{vendor}/{package})
+```
+
+### Node.js / npm Package
+
+```markdown
+[![npm version](https://img.shields.io/npm/v/{package}?style=flat-square)](https://www.npmjs.com/package/{package})
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+[![npm downloads](https://img.shields.io/npm/dm/{package}?style=flat-square)](https://www.npmjs.com/package/{package})
+```
+
+### Python Package (PyPI)
+
+```markdown
+[![PyPI version](https://img.shields.io/pypi/v/{package}?style=flat-square)](https://pypi.org/project/{package}/)
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+[![PyPI downloads](https://img.shields.io/pypi/dm/{package}?style=flat-square)](https://pypi.org/project/{package}/)
+```
+
+### Ruby Gem (RubyGems)
+
+```markdown
+[![Gem Version](https://img.shields.io/gem/v/{gem}?style=flat-square)](https://rubygems.org/gems/{gem})
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+[![Gem Downloads](https://img.shields.io/gem/dt/{gem}?style=flat-square)](https://rubygems.org/gems/{gem})
+```
+
+### Rust Crate (crates.io)
+
+```markdown
+[![crates.io](https://img.shields.io/crates/v/{crate}?style=flat-square)](https://crates.io/crates/{crate})
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+[![Downloads](https://img.shields.io/crates/d/{crate}?style=flat-square)](https://crates.io/crates/{crate})
+```
+
+### .NET Package (NuGet)
+
+```markdown
+[![NuGet](https://img.shields.io/nuget/v/{package}?style=flat-square)](https://www.nuget.org/packages/{package}/)
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/{package}?style=flat-square)](https://www.nuget.org/packages/{package}/)
+```
+
+### Java Package (Maven Central)
+
+```markdown
+[![Maven Central](https://img.shields.io/maven-central/v/{groupId}/{artifactId}?style=flat-square)](https://central.sonatype.com/artifact/{groupId}/{artifactId})
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+```
+
+### Go Module
+
+```markdown
+[![Go Reference](https://pkg.go.dev/badge/{module-path}.svg)](https://pkg.go.dev/{module-path})
+[![Latest Version](https://img.shields.io/github/v/release/{owner}/{repo}?style=flat-square)](https://github.com/{owner}/{repo}/releases)
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+```
+
+### Dart / Flutter Package (Pub.dev)
+
+```markdown
+[![pub package](https://img.shields.io/pub/v/{package}?style=flat-square)](https://pub.dev/packages/{package})
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+```
+
+### Elixir Package (Hex.pm)
+
+```markdown
+[![Hex.pm](https://img.shields.io/hexpm/v/{package}?style=flat-square)](https://hex.pm/packages/{package})
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+[![Hex.pm Downloads](https://img.shields.io/hexpm/dt/{package}?style=flat-square)](https://hex.pm/packages/{package})
+```
+
+### REST API (Generic)
+
+```markdown
+[![Latest Version](https://img.shields.io/github/v/release/{owner}/{repo}?style=flat-square)](https://github.com/{owner}/{repo}/releases)
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+```
+
+### CLI Tool (Generic)
+
+```markdown
+[![Latest Version](https://img.shields.io/github/v/release/{owner}/{repo}?style=flat-square)](https://github.com/{owner}/{repo}/releases)
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+```
+
+### Full-Stack Application (Generic)
+
+```markdown
+[![Latest Version](https://img.shields.io/github/v/release/{owner}/{repo}?style=flat-square)](https://github.com/{owner}/{repo}/releases)
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
 ```
 
 ## Tips for Choosing Structure

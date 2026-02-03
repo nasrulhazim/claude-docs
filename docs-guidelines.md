@@ -1,6 +1,6 @@
 # Global Documentation Standards
 
-> **Version**: 1.2.0
+> **Version**: 1.3.0
 > **Last Updated**: 2026-02-03
 > **Applies To**: All projects using Claude Code
 
@@ -142,7 +142,7 @@ graph TB
 
 Project overview with:
 
-- **Badges** - Build status, version, coverage
+- **Badges** - Required badges per [Badge Requirements](#badge-requirements) below
 - **Description** - One-paragraph overview
 - **Features** - Key capabilities (bullet points)
 - **Installation** - Quick install command
@@ -151,6 +151,92 @@ Project overview with:
 - **Contributing/License** - Standard sections
 
 **Keep root README minimal** - detailed docs go in `docs/`
+
+#### Badge Requirements
+
+Every root `README.md` **must** include badges immediately after the H1 title,
+on a single line (or consecutive lines), using `flat-square` style from shields.io.
+Each badge image **must** link to its relevant page (registry, actions, license file).
+
+##### Tier 1 -- Mandatory (All Projects)
+
+| Badge | Purpose | shields.io Pattern |
+|-------|---------|-------------------|
+| **Latest Version** | Current release | `github/v/release/{owner}/{repo}` |
+| **License** | License type | `github/license/{owner}/{repo}` |
+| **CI/Build Status** | Build health | `github/actions/workflow/status/{owner}/{repo}/{workflow}.yml` |
+
+##### Tier 2 -- Mandatory (Packages Only, by Registry)
+
+If the project is published to a package registry, add the registry-specific version and download badges:
+
+| Registry | Version Badge | Downloads Badge |
+|----------|--------------|-----------------|
+| **Packagist** (PHP/Composer) | `packagist/v/{vendor}/{package}` | `packagist/dm/{vendor}/{package}` |
+| **npm** (Node.js) | `npm/v/{package}` | `npm/dm/{package}` |
+| **PyPI** (Python) | `pypi/v/{package}` | `pypi/dm/{package}` |
+| **RubyGems** (Ruby) | `gem/v/{gem}` | `gem/dt/{gem}` |
+| **crates.io** (Rust) | `crates/v/{crate}` | `crates/d/{crate}` |
+| **NuGet** (.NET) | `nuget/v/{package}` | `nuget/dt/{package}` |
+| **Maven Central** (Java) | `maven-central/v/{groupId}/{artifactId}` | -- |
+| **Go Modules** (Go) | `github/v/release/{owner}/{repo}` | -- |
+| **Pub.dev** (Dart/Flutter) | `pub/v/{package}` | -- |
+| **Hex.pm** (Elixir) | `hexpm/v/{package}` | `hexpm/dt/{package}` |
+
+##### Tier 3 -- Recommended (Optional)
+
+| Badge | Purpose | shields.io Pattern |
+|-------|---------|-------------------|
+| **Code Coverage** | Test quality | `codecov/c/github/{owner}/{repo}` |
+| **PHP Version** | Compatibility | `packagist/dependency-v/{vendor}/{package}/php` |
+| **Node Version** | Compatibility | `node/v/{package}` |
+| **Python Version** | Compatibility | `pypi/pyversions/{package}` |
+| **Go Version** | Compatibility | `github/go-mod/go-version/{owner}/{repo}` |
+| **Rust MSRV** | Compatibility | `crates/msrv/{crate}` |
+
+##### Badge Placement Rules
+
+1. Badges appear **immediately after the H1 title**, before any description text
+2. Use one badge per line or all badges on a single line separated by spaces
+3. All badges use `?style=flat-square` query parameter
+4. Every badge image **must** be wrapped in a link to the relevant page
+5. Tier 1 badges come first, then Tier 2 (registry), then Tier 3 (optional)
+
+##### Generic Badge Template
+
+```markdown
+[![Latest Version](https://img.shields.io/github/v/release/{owner}/{repo}?style=flat-square)](https://github.com/{owner}/{repo}/releases)
+[![License](https://img.shields.io/github/license/{owner}/{repo}?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/{owner}/{repo}/{workflow}.yml?style=flat-square)](https://github.com/{owner}/{repo}/actions)
+```
+
+##### Registry-Specific Badge Reference
+
+| Registry | Version Template | Downloads Template |
+|----------|-----------------|-------------------|
+| Packagist | `packagist/v/{vendor}/{package}` | `packagist/dt/{vendor}/{package}` |
+| npm | `npm/v/{package}` | `npm/dm/{package}` |
+| PyPI | `pypi/v/{package}` | `pypi/dm/{package}` |
+| RubyGems | `gem/v/{gem}` | `gem/dt/{gem}` |
+| crates.io | `crates/v/{crate}` | `crates/d/{crate}` |
+| NuGet | `nuget/v/{package}` | `nuget/dt/{package}` |
+| Maven Central | `maven-central/v/{groupId}/{artifactId}` | -- |
+| Go Modules | `github/v/release/{owner}/{repo}` | -- |
+| Pub.dev | `pub/v/{package}` | -- |
+| Hex.pm | `hexpm/v/{package}` | `hexpm/dt/{package}` |
+
+##### Project Type Badge Matrix
+
+| Badge | PHP Pkg | npm Pkg | PyPI Pkg | Ruby Gem | Rust Crate | .NET Pkg | Java Pkg | Go Mod | Dart Pkg | Elixir Pkg | API | CLI | Full-Stack |
+|-------|:-------:|:-------:|:--------:|:--------:|:----------:|:--------:|:--------:|:------:|:--------:|:----------:|:---:|:---:|:----------:|
+| Version | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| License | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| CI Status | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| Registry Downloads | Yes | Yes | Yes | Yes | Yes | Yes | -- | -- | -- | Yes | -- | -- | -- |
+| Coverage | Rec | Rec | Rec | Rec | Rec | Rec | Rec | Rec | Rec | Rec | Rec | Rec | Rec |
+| Lang Version | Rec | Rec | Rec | -- | Rec | -- | -- | Rec | -- | -- | -- | -- | -- |
+
+> **Note**: "Yes" = mandatory, "Rec" = recommended, "--" = not applicable.
 
 ### docs/README.md
 
@@ -697,6 +783,15 @@ Use this checklist when creating or auditing documentation:
 - [ ] Consistent list marker style (dashes)
 - [ ] Line length under 120 characters (prose)
 
+### Badges
+
+- [ ] Root README.md has Tier 1 badges (Version, License, CI)
+- [ ] Badges appear immediately after H1 title
+- [ ] All badges use `?style=flat-square`
+- [ ] All badge images link to relevant pages
+- [ ] Registry-specific badges included (if published package)
+- [ ] Badge shields.io URLs use correct patterns
+
 ## Examples
 
 ### Example: Laravel Package Documentation
@@ -794,6 +889,19 @@ When updating this guideline:
 4. Notify team of changes
 
 ### CHANGELOG
+
+**v1.3.0** (2026-02-03)
+
+- Added mandatory Badge Requirements subsection with Tier 1/2/3 badge specifications
+- Added badge placement rules and generic badge markdown template
+- Added Registry-Specific Badge Reference table covering 10 package registries
+- Added Project Type Badge Matrix for 13 project types
+- Added Badges validation checklist section
+- Updated Root README.md requirements to reference Badge Requirements
+- Added badge templates for all major ecosystems in EXAMPLES.md
+- Expanded project detection table with Python, Ruby, Rust, Go, .NET, Java, Dart, Elixir
+- Added badge generation and validation steps to documentation workflow
+- Added Badge Compliance metric to health report
 
 **v1.2.0** (2026-02-03)
 

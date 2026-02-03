@@ -41,14 +41,25 @@ graph TD
 
 Before creating documentation, analyze the project to determine its type:
 
-| Indicator | Project Type | Suggested Template |
-|-----------|-------------|-------------------|
-| `composer.json` + `artisan` | Laravel Application | Full-Stack Application |
-| `composer.json` + `src/` (no artisan) | PHP/Laravel Package | Laravel Package |
-| `package.json` + `src/` | Node.js Library/SDK | Library/SDK |
-| `package.json` + `routes/` or `pages/` | Full-Stack JS App | Full-Stack Application |
-| CLI entry point (`bin/`, `cli.js`) | CLI Tool | CLI Tool |
-| `openapi.yaml` or `swagger.json` | API Service | REST API |
+| Indicator | Project Type | Suggested Template | Registry |
+|-----------|-------------|-------------------|----------|
+| `composer.json` + `artisan` | Laravel Application | Full-Stack Application | -- |
+| `composer.json` + `src/` (no artisan) | PHP/Laravel Package | Laravel Package | Packagist |
+| `package.json` + `src/` | Node.js Library/SDK | Library/SDK | npm |
+| `package.json` + `routes/` or `pages/` | Full-Stack JS App | Full-Stack Application | -- |
+| CLI entry point (`bin/`, `cli.js`) | CLI Tool | CLI Tool | npm (if published) |
+| `openapi.yaml` or `swagger.json` | API Service | REST API | -- |
+| `setup.py` or `pyproject.toml` | Python Package | Library/SDK | PyPI |
+| `requirements.txt` + app structure | Python Application | Full-Stack Application | -- |
+| `Gemfile` + `*.gemspec` | Ruby Gem | Library/SDK | RubyGems |
+| `Gemfile` + `config/routes.rb` | Rails Application | Full-Stack Application | -- |
+| `Cargo.toml` (lib) | Rust Crate | Library/SDK | crates.io |
+| `Cargo.toml` (bin) | Rust Application | CLI Tool | -- |
+| `*.csproj` or `*.sln` | .NET Package/App | Library/SDK | NuGet |
+| `pom.xml` or `build.gradle` | Java Package/App | Library/SDK | Maven Central |
+| `go.mod` | Go Module | Library/SDK | Go Modules |
+| `pubspec.yaml` | Dart/Flutter Package | Library/SDK | Pub.dev |
+| `mix.exs` | Elixir Package | Library/SDK | Hex.pm |
 
 Use the matching template from `~/.claude/docs-guidelines.md` examples as the starting point. If no match, use the general-purpose structure.
 
@@ -103,9 +114,11 @@ flowchart LR
 ### Create New Documentation Structure
 
 1. Detect project type using the Project Detection table above.
-2. Analyze the project and create a complete documentation structure following the numbered folder pattern with context-based organization.
-3. After creating documentation files, automatically run linter to ensure quality.
-4. Fix any linting errors found.
+2. Generate badge block for root `README.md` based on detected project type and registry
+   (see `docs-guidelines.md` Badge Requirements).
+3. Analyze the project and create a complete documentation structure following the numbered folder pattern with context-based organization.
+4. After creating documentation files, automatically run linter to ensure quality.
+5. Fix any linting errors found.
 
 ### Reorganize Existing Documentation
 
@@ -122,9 +135,11 @@ flowchart LR
 ### Validate Documentation
 
 1. Check all documentation against standards: numbering, naming conventions, TOCs, cross-references, and progressive detail flow.
-2. Run `markdownlint docs/**/*.md` to check for formatting issues.
-3. Report all validation and linting errors found.
-4. Optionally fix errors with `markdownlint --fix docs/**/*.md` if user requests.
+2. Validate root `README.md` badge compliance: Tier 1 badges present, `flat-square` style,
+   correct shields.io patterns, registry badges if applicable.
+3. Run `markdownlint docs/**/*.md` to check for formatting issues.
+4. Report all validation and linting errors found.
+5. Optionally fix errors with `markdownlint --fix docs/**/*.md` if user requests.
 
 ### Generate Health Report
 
@@ -138,6 +153,7 @@ flowchart LR
 | Link Health | Broken internal/external links |
 | Lint Score | % of files passing markdownlint |
 | Naming Compliance | Files following `{nn}-{kebab}.md` convention |
+| Badge Compliance | Root README.md has required badges with correct style and patterns |
 
 2. Output a summary table with pass/fail/warning per metric.
 3. List specific files that need attention.
