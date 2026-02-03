@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Claude Code Release Note Generator
-# Generate release notes from today's git log activity
+# Generate release notes from git log activity (raw markdown to terminal)
+# Optionally creates CHANGELOG.md if it doesn't exist
 # Usage:
 #   ./release-note.sh              # Full release note (today)
 #   ./release-note.sh --tldr       # TLDR version (today)
@@ -12,13 +13,10 @@
 
 set -e
 
-# Colors
+# Colors (only for stderr messages, not for markdown output)
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-BOLD='\033[1m'
-DIM='\033[2m'
 NC='\033[0m'
 
 # Defaults
@@ -51,6 +49,7 @@ while [[ $# -gt 0 ]]; do
             echo "Usage: ./release-note.sh [options]"
             echo ""
             echo "Generate release notes from git log activity."
+            echo "Output is raw markdown printed to terminal (stdout)."
             echo ""
             echo "Options:"
             echo "  --full, -f          Full/comprehensive release note (default)"
@@ -66,11 +65,14 @@ while [[ $# -gt 0 ]]; do
             echo "  ./release-note.sh --since yesterday        Full note, since yesterday"
             echo "  ./release-note.sh --tldr --since '1 week ago'"
             echo "  ./release-note.sh --output RELEASE.md      Write to file"
+            echo ""
+            echo "If CHANGELOG.md does not exist in the repo root, it will be created"
+            echo "automatically with a default template."
             exit 0
             ;;
         *)
-            echo -e "${RED}Unknown option: $1${NC}"
-            echo "Run with --help for usage."
+            echo -e "${RED}Unknown option: $1${NC}" >&2
+            echo "Run with --help for usage." >&2
             exit 1
             ;;
     esac
@@ -78,8 +80,35 @@ done
 
 # Check we're in a git repo
 if ! git rev-parse --is-inside-work-tree &>/dev/null; then
-    echo -e "${RED}Error: Not a git repository.${NC}"
+    echo -e "${RED}Error: Not a git repository.${NC}" >&2
     exit 1
+fi
+
+# Get repo root for CHANGELOG.md check
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+# Create CHANGELOG.md if it doesn't exist
+if [ ! -f "$REPO_ROOT/CHANGELOG.md" ]; then
+    REPO_NAME=$(basename "$REPO_ROOT")
+    cat > "$REPO_ROOT/CHANGELOG.md" << 'CHANGELOG_EOF'
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+
+### Changed
+
+### Fixed
+
+### Removed
+CHANGELOG_EOF
+    echo -e "${GREEN}Created CHANGELOG.md at $REPO_ROOT/CHANGELOG.md${NC}" >&2
 fi
 
 # Resolve since date for git log
@@ -91,7 +120,7 @@ else
 fi
 
 # Get repo info
-REPO_NAME=$(basename "$(git rev-parse --show-toplevel)")
+REPO_NAME=$(basename "$REPO_ROOT")
 CURRENT_BRANCH=$(git branch --show-current 2>/dev/null || echo "HEAD")
 TODAY=$(date +%Y-%m-%d)
 
@@ -99,7 +128,7 @@ TODAY=$(date +%Y-%m-%d)
 COMMIT_COUNT=$(git log "$SINCE_FLAG" --oneline 2>/dev/null | wc -l | tr -d ' ')
 
 if [ "$COMMIT_COUNT" -eq 0 ]; then
-    echo -e "${YELLOW}No commits found since $SINCE_LABEL.${NC}"
+    echo -e "${YELLOW}No commits found since $SINCE_LABEL.${NC}" >&2
     exit 0
 fi
 
@@ -108,7 +137,6 @@ LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
 
 # Collect git data
 COMMITS_ONELINE=$(git log "$SINCE_FLAG" --oneline --no-merges 2>/dev/null)
-COMMITS_FULL=$(git log "$SINCE_FLAG" --no-merges --format="- **%s** %n  %b" 2>/dev/null | sed '/^$/d; /^  $/d')
 AUTHORS=$(git log "$SINCE_FLAG" --no-merges --format="%aN" 2>/dev/null | sort -u)
 AUTHOR_COUNT=$(echo "$AUTHORS" | grep -c '.' 2>/dev/null || echo 0)
 FILES_CHANGED=$(git log "$SINCE_FLAG" --no-merges --name-only --format="" 2>/dev/null | sort -u | grep -c '.' 2>/dev/null || echo 0)
@@ -144,13 +172,8 @@ format_commits() {
     done
 }
 
-# Build output
+# Build full release note (raw markdown)
 generate_full() {
-    local version_label=""
-    if [ -n "$LATEST_TAG" ]; then
-        version_label=" (since $LATEST_TAG)"
-    fi
-
     echo "# Release Note - $REPO_NAME"
     echo ""
     echo "> **Date**: $TODAY"
@@ -169,7 +192,6 @@ generate_full() {
     echo "| Contributors | $AUTHOR_COUNT |"
     echo ""
 
-    # Features
     if [ -n "$FEAT_COMMITS" ]; then
         echo "## New Features"
         echo ""
@@ -177,7 +199,6 @@ generate_full() {
         echo ""
     fi
 
-    # Fixes
     if [ -n "$FIX_COMMITS" ]; then
         echo "## Bug Fixes"
         echo ""
@@ -185,7 +206,6 @@ generate_full() {
         echo ""
     fi
 
-    # Docs
     if [ -n "$DOCS_COMMITS" ]; then
         echo "## Documentation"
         echo ""
@@ -193,7 +213,6 @@ generate_full() {
         echo ""
     fi
 
-    # Refactor
     if [ -n "$REFACTOR_COMMITS" ]; then
         echo "## Refactoring"
         echo ""
@@ -201,7 +220,6 @@ generate_full() {
         echo ""
     fi
 
-    # Chores
     if [ -n "$CHORE_COMMITS" ]; then
         echo "## Maintenance"
         echo ""
@@ -209,7 +227,6 @@ generate_full() {
         echo ""
     fi
 
-    # Other
     OTHER_CLEAN=$(echo -e "$OTHER_COMMITS" | sed '/^$/d')
     if [ -n "$OTHER_CLEAN" ]; then
         echo "## Other Changes"
@@ -218,7 +235,6 @@ generate_full() {
         echo ""
     fi
 
-    # Contributors
     echo "## Contributors"
     echo ""
     echo "$AUTHORS" | while IFS= read -r author; do
@@ -228,7 +244,6 @@ generate_full() {
     done
     echo ""
 
-    # Files changed detail
     echo "## Files Changed"
     echo ""
     echo '```text'
@@ -241,6 +256,7 @@ generate_full() {
     echo "*Generated on $TODAY by [Claude Code Documentation Standards](https://github.com/nasrulhazim/claude-docs)*"
 }
 
+# Build TLDR release note (raw markdown)
 generate_tldr() {
     echo "# TLDR - $REPO_NAME ($TODAY)"
     echo ""
@@ -263,7 +279,6 @@ generate_tldr() {
         echo ""
     fi
 
-    # Everything else as one-liners
     local rest=""
     if [ -n "$DOCS_COMMITS" ]; then
         rest="${rest}$(format_commits "$DOCS_COMMITS")\n"
@@ -287,18 +302,18 @@ generate_tldr() {
     fi
 }
 
-# Generate
+# Generate output — raw markdown to stdout, status messages to stderr
 if [ "$MODE" = "tldr" ]; then
     if [ -n "$OUTPUT_FILE" ]; then
         generate_tldr > "$OUTPUT_FILE"
-        echo -e "${GREEN}TLDR release note written to $OUTPUT_FILE${NC}"
+        echo -e "${GREEN}TLDR release note written to $OUTPUT_FILE${NC}" >&2
     else
         generate_tldr
     fi
 else
     if [ -n "$OUTPUT_FILE" ]; then
         generate_full > "$OUTPUT_FILE"
-        echo -e "${GREEN}Full release note written to $OUTPUT_FILE${NC}"
+        echo -e "${GREEN}Full release note written to $OUTPUT_FILE${NC}" >&2
     else
         generate_full
     fi
