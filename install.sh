@@ -58,13 +58,7 @@ install_file() {
     local file_desc=$3
 
     if [ -f "$dest_file" ]; then
-        echo -e "${YELLOW}⚠️  $file_desc already exists${NC}"
-        read -p "Overwrite? (y/N): " -n 1 -r
-        echo
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-            echo -e "${YELLOW}Skipping $file_desc${NC}"
-            return 1
-        fi
+        echo -e "${YELLOW}⚠️  $file_desc already exists, replacing...${NC}"
     fi
 
     if [ "$INSTALL_MODE" = "local" ]; then
