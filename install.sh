@@ -101,6 +101,10 @@ fi
 install_file "docs-guidelines.md" ~/.claude/docs-guidelines.md "Documentation guidelines"
 install_file ".markdownlintrc" ~/.claude/.markdownlintrc "Markdownlint configuration"
 install_file "docs.md" ~/.claude/commands/docs.md "Documentation command"
+install_file "lint.sh" ~/.claude/lint.sh "Markdown linter script"
+
+# Make lint.sh executable
+chmod +x ~/.claude/lint.sh 2>/dev/null || true
 
 echo ""
 echo -e "${GREEN}✅ Claude Code Documentation Standards installed successfully!${NC}"
@@ -110,24 +114,23 @@ echo "   /docs                           - Create new documentation"
 echo "   /docs reorganize                - Reorganize existing docs"
 echo "   /docs validate                  - Validate documentation structure"
 echo "   /docs update-toc                - Update all README.md TOCs"
+echo "   /docs health                    - Generate documentation health report"
+echo "   /docs scaffold <type>           - Scaffold from template"
 echo ""
 echo "📋 Guidelines Location:"
 echo "   ~/.claude/docs-guidelines.md"
 echo ""
-if [ -z "$SKIP_LINTER" ]; then
 echo "🔍 Linting Commands:"
-echo "   markdownlint docs/**/*.md       - Lint all markdown files"
-echo "   markdownlint --fix docs/*.md    - Auto-fix markdown issues"
-echo "   markdownlint --config ~/.claude/.markdownlintrc docs/*.md"
+echo "   ~/.claude/lint.sh               - Lint all docs/ markdown files"
+echo "   ~/.claude/lint.sh --fix         - Auto-fix all docs/ markdown files"
+echo "   ~/.claude/lint.sh src/          - Lint a specific directory"
+echo "   ~/.claude/lint.sh --fix src/    - Auto-fix a specific directory"
 echo ""
-fi
 echo "🔧 Example Commands:"
 echo "   /docs"
 echo "   Reorganize docs following ~/.claude/docs-guidelines.md"
 echo "   Validate docs against ~/.claude/docs-guidelines.md"
-if [ -z "$SKIP_LINTER" ]; then
-echo "   markdownlint docs/**/*.md"
-fi
+echo "   ~/.claude/lint.sh"
 echo ""
 echo "📚 Full README:"
 if [ "$INSTALL_MODE" = "local" ]; then

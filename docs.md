@@ -68,8 +68,8 @@ flowchart LR
 | Step | Action | Command |
 |------|--------|---------|
 | 1 | Write/Update | Create or modify documentation files following standards |
-| 2 | Lint | `markdownlint docs/**/*.md` |
-| 3 | Fix | `markdownlint --fix docs/**/*.md` or manual correction |
+| 2 | Lint | `~/.claude/lint.sh` or `~/.claude/lint.sh <path>` |
+| 3 | Fix | `~/.claude/lint.sh --fix` or manual correction |
 | 4 | Verify | Confirm all files pass linting |
 
 > **Note**: Only run linting if `markdownlint-cli` is installed. If not available, skip linting step and inform user they can install it with `npm install -g markdownlint-cli`.

@@ -74,6 +74,7 @@ The installer copies these files to your `~/.claude` directory:
 | `docs-guidelines.md` | `~/.claude/` | Global documentation standards |
 | `.markdownlintrc` | `~/.claude/` | Markdown linting rules |
 | `docs.md` | `~/.claude/commands/` | `/docs` slash command |
+| `lint.sh` | `~/.claude/` | Batch markdown linter script |
 | `markdownlint-cli` | Global npm | Markdown linter (if npm available) |
 
 ## Usage
@@ -105,15 +106,19 @@ Claude will:
 | `/docs health` | Generate documentation health report |
 | `/docs scaffold <type>` | Scaffold from template: `laravel`, `api`, `cli`, `sdk`, `fullstack` |
 
-### Manual Linting
+### Linting
 
-Lint your documentation manually:
+Use the included `lint.sh` script to lint all markdown files at once:
 
 | Action | Command |
 |--------|---------|
-| Lint all markdown files | `markdownlint docs/**/*.md` |
-| Auto-fix issues | `markdownlint --fix docs/**/*.md` |
-| Use custom config | `markdownlint --config ~/.claude/.markdownlintrc docs/**/*.md` |
+| Lint all docs | `~/.claude/lint.sh` |
+| Lint & auto-fix all docs | `~/.claude/lint.sh --fix` |
+| Lint specific directory | `~/.claude/lint.sh src/` |
+| Lint & auto-fix specific dir | `~/.claude/lint.sh --fix src/` |
+| Lint current directory | `~/.claude/lint.sh .` |
+
+The script auto-detects `.markdownlintrc` config (local first, then `~/.claude/`), finds all `.md` files recursively, and lints them in one pass.
 
 ## Documentation Structure
 

@@ -521,11 +521,21 @@ Linting rules are defined in `~/.claude/.markdownlintrc`:
 
 #### Running the Linter
 
+Use the included `lint.sh` script to lint all files in one pass:
+
 | Action | Command |
 |--------|---------|
-| Lint all docs | `markdownlint docs/**/*.md` |
+| Lint all docs | `~/.claude/lint.sh` |
+| Lint & auto-fix all docs | `~/.claude/lint.sh --fix` |
+| Lint specific directory | `~/.claude/lint.sh src/` |
+| Lint & auto-fix specific dir | `~/.claude/lint.sh --fix src/` |
+| Lint current directory | `~/.claude/lint.sh .` |
+
+Or run `markdownlint` directly for single files:
+
+| Action | Command |
+|--------|---------|
 | Lint specific file | `markdownlint docs/01-architecture/01-overview.md` |
-| Auto-fix issues | `markdownlint --fix docs/**/*.md` |
 | Use custom config | `markdownlint --config ~/.claude/.markdownlintrc docs/**/*.md` |
 
 #### Common Linting Issues
