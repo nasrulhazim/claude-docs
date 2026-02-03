@@ -2,7 +2,7 @@
 
 # Claude Code Release Note Generator
 # Generate release notes from git log activity (raw markdown to terminal)
-# Optionally creates CHANGELOG.md if it doesn't exist
+# Use --write to append entries to CHANGELOG.md in Keep a Changelog format
 # Usage:
 #   ./release-note.sh              # Full release note (today)
 #   ./release-note.sh --tldr       # TLDR version (today)
@@ -10,6 +10,7 @@
 #   ./release-note.sh --tldr --since "2025-12-01"
 #   ./release-note.sh --since "2 days ago"
 #   ./release-note.sh --output RELEASE.md
+#   ./release-note.sh --write      # Append to CHANGELOG.md
 
 set -e
 
@@ -24,6 +25,7 @@ MODE="full"
 SINCE="today"
 SINCE_LABEL="today"
 OUTPUT_FILE=""
+WRITE_CHANGELOG=false
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -45,6 +47,10 @@ while [[ $# -gt 0 ]]; do
             OUTPUT_FILE="$2"
             shift 2
             ;;
+        --write|-w)
+            WRITE_CHANGELOG=true
+            shift
+            ;;
         --help|-h)
             echo "Usage: ./release-note.sh [options]"
             echo ""
@@ -57,6 +63,7 @@ while [[ $# -gt 0 ]]; do
             echo "  --since, -s <date>  Start date (default: today)"
             echo "                      Accepts: today, yesterday, '2 days ago', '2025-12-01'"
             echo "  --output, -o <file> Write output to file instead of stdout"
+            echo "  --write, -w         Append to CHANGELOG.md (Keep a Changelog format)"
             echo "  --help, -h          Show this help message"
             echo ""
             echo "Examples:"
@@ -65,9 +72,8 @@ while [[ $# -gt 0 ]]; do
             echo "  ./release-note.sh --since yesterday        Full note, since yesterday"
             echo "  ./release-note.sh --tldr --since '1 week ago'"
             echo "  ./release-note.sh --output RELEASE.md      Write to file"
-            echo ""
-            echo "If CHANGELOG.md does not exist in the repo root, it will be created"
-            echo "automatically with a default template."
+            echo "  ./release-note.sh --write                  Append to CHANGELOG.md"
+            echo "  ./release-note.sh --write --since '1 week ago'"
             exit 0
             ;;
         *)
@@ -84,32 +90,8 @@ if ! git rev-parse --is-inside-work-tree &>/dev/null; then
     exit 1
 fi
 
-# Get repo root for CHANGELOG.md check
+# Get repo root
 REPO_ROOT=$(git rev-parse --show-toplevel)
-
-# Create CHANGELOG.md if it doesn't exist
-if [ ! -f "$REPO_ROOT/CHANGELOG.md" ]; then
-    REPO_NAME=$(basename "$REPO_ROOT")
-    cat > "$REPO_ROOT/CHANGELOG.md" << 'CHANGELOG_EOF'
-# Changelog
-
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## [Unreleased]
-
-### Added
-
-### Changed
-
-### Fixed
-
-### Removed
-CHANGELOG_EOF
-    echo -e "${GREEN}Created CHANGELOG.md at $REPO_ROOT/CHANGELOG.md${NC}" >&2
-fi
 
 # Resolve since date for git log
 if [ "$SINCE" = "today" ]; then
@@ -302,7 +284,108 @@ generate_tldr() {
     fi
 }
 
-# Generate output — raw markdown to stdout, status messages to stderr
+# Build Keep a Changelog entry (for --write)
+generate_changelog_entry() {
+    local entry=""
+
+    if [ -n "$FEAT_COMMITS" ]; then
+        entry="${entry}### Added\n\n"
+        entry="${entry}$(format_commits "$FEAT_COMMITS")\n\n"
+    fi
+
+    # Merge docs, refactor, chore, other into Changed
+    local changed=""
+    if [ -n "$DOCS_COMMITS" ]; then
+        changed="${changed}$(format_commits "$DOCS_COMMITS")\n"
+    fi
+    if [ -n "$REFACTOR_COMMITS" ]; then
+        changed="${changed}$(format_commits "$REFACTOR_COMMITS")\n"
+    fi
+    if [ -n "$CHORE_COMMITS" ]; then
+        changed="${changed}$(format_commits "$CHORE_COMMITS")\n"
+    fi
+    OTHER_CLEAN=$(echo -e "$OTHER_COMMITS" | sed '/^$/d')
+    if [ -n "$OTHER_CLEAN" ]; then
+        changed="${changed}$(format_commits "$OTHER_CLEAN")\n"
+    fi
+    changed_clean=$(echo -e "$changed" | sed '/^$/d')
+    if [ -n "$changed_clean" ]; then
+        entry="${entry}### Changed\n\n"
+        entry="${entry}${changed_clean}\n\n"
+    fi
+
+    if [ -n "$FIX_COMMITS" ]; then
+        entry="${entry}### Fixed\n\n"
+        entry="${entry}$(format_commits "$FIX_COMMITS")\n\n"
+    fi
+
+    echo -e "$entry"
+}
+
+# Write to CHANGELOG.md (insert under ## [Unreleased], preserving existing content)
+write_changelog() {
+    local changelog="$REPO_ROOT/CHANGELOG.md"
+    local entry
+    entry=$(generate_changelog_entry)
+
+    # Create CHANGELOG.md if it doesn't exist
+    if [ ! -f "$changelog" ]; then
+        cat > "$changelog" << CHANGELOG_EOF
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+${entry}
+CHANGELOG_EOF
+        echo -e "${GREEN}Created CHANGELOG.md with entries at $changelog${NC}" >&2
+        return
+    fi
+
+    # Insert entry after "## [Unreleased]" line
+    if grep -q '## \[Unreleased\]' "$changelog"; then
+        local tmp
+        tmp=$(mktemp)
+        local inserted=false
+        while IFS= read -r line; do
+            echo "$line" >> "$tmp"
+            if [ "$inserted" = false ] && echo "$line" | grep -q '## \[Unreleased\]'; then
+                echo "" >> "$tmp"
+                echo -n "$entry" >> "$tmp"
+                inserted=true
+            fi
+        done < "$changelog"
+        mv "$tmp" "$changelog"
+        echo -e "${GREEN}Updated CHANGELOG.md with new entries${NC}" >&2
+    else
+        # No [Unreleased] section found — insert one after the first heading
+        local tmp
+        tmp=$(mktemp)
+        local inserted=false
+        while IFS= read -r line; do
+            echo "$line" >> "$tmp"
+            if [ "$inserted" = false ] && echo "$line" | grep -qE '^# '; then
+                echo "" >> "$tmp"
+                echo "## [Unreleased]" >> "$tmp"
+                echo "" >> "$tmp"
+                echo -n "$entry" >> "$tmp"
+                inserted=true
+            fi
+        done < "$changelog"
+        mv "$tmp" "$changelog"
+        echo -e "${GREEN}Added [Unreleased] section with entries to CHANGELOG.md${NC}" >&2
+    fi
+}
+
+# Generate output
+if [ "$WRITE_CHANGELOG" = true ]; then
+    write_changelog
+fi
+
 if [ "$MODE" = "tldr" ]; then
     if [ -n "$OUTPUT_FILE" ]; then
         generate_tldr > "$OUTPUT_FILE"
