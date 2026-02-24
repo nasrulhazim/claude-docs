@@ -4,17 +4,17 @@ All available `/docs` commands in Claude Code.
 
 ## Command Reference
 
-| Command                              | Description                                                        |
-|--------------------------------------|--------------------------------------------------------------------|
-| `/docs`                              | Create new documentation structure (auto-detects project type)     |
-| `/docs reorganize`                   | Reorganize existing docs into numbered standard                    |
-| `/docs validate`                     | Validate against standards and report issues                       |
-| `/docs update-toc`                   | Update all README.md TOCs                                          |
-| `/docs health`                       | Generate documentation health report                               |
+| Command                              | Description                                                         |
+|--------------------------------------|---------------------------------------------------------------------|
+| `/docs`                              | Create new documentation structure (auto-detects project type)      |
+| `/docs reorganize`                   | Reorganize existing docs into numbered standard                     |
+| `/docs validate`                     | Validate against standards and report issues                        |
+| `/docs update-toc`                   | Update all README.md TOCs                                           |
+| `/docs health`                       | Generate documentation health report                                |
 | `/docs scaffold <type>`              | Scaffold from template: `laravel`, `api`, `cli`, `sdk`, `fullstack` |
-| `/docs release-note`                 | Generate full release note from today's git log                    |
-| `/docs release-note --tldr`          | Generate TLDR release note                                         |
-| `/docs release-note --since <date>`  | Release note from a specific date range                            |
+| `/docs release-note`                 | Generate full release note from today's git log                     |
+| `/docs release-note --tldr`          | Generate TLDR release note                                          |
+| `/docs release-note --since <date>`  | Release note from a specific date range                             |
 
 ## Task Modes
 
