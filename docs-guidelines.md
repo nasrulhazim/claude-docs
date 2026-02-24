@@ -727,14 +727,14 @@ flowchart TD
     G -->|Yes| H[Done]
 ```
 
-| Step | Action                    | Command / Detail                                                    |
-|------|---------------------------|---------------------------------------------------------------------|
+| Step | Action                    | Command / Detail                                                       |
+|------|---------------------------|------------------------------------------------------------------------|
 | 1    | Audit current structure   | List all existing docs, identify context groupings, determine priority |
-| 2    | Create numbered structure | `mkdir -p docs/{01-architecture,02-development,03-deployment}`      |
-| 3    | Move and rename files     | `mv docs/architecture.md docs/01-architecture/01-overview.md`       |
-| 4    | Create README.md files    | docs/README.md (main index) + each context folder README.md (TOC)  |
-| 5    | Update cross-references   | Change absolute paths to relative, update for new numbered structure |
-| 6    | Validate links            | Test all internal links, ensure progressive flow                    |
+| 2    | Create numbered structure | `mkdir -p docs/{01-architecture,02-development,03-deployment}`         |
+| 3    | Move and rename files     | `mv docs/architecture.md docs/01-architecture/01-overview.md`          |
+| 4    | Create README.md files    | docs/README.md (main index) + each context folder README.md (TOC)     |
+| 5    | Update cross-references   | Change absolute paths to relative, update for new numbered structure   |
+| 6    | Validate links            | Test all internal links, ensure progressive flow                       |
 
 ## Checklist
 

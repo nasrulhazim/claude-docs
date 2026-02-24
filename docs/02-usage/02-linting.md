@@ -5,13 +5,13 @@ script.
 
 ## Quick Reference
 
-| Action                   | Command                        |
-|--------------------------|--------------------------------|
-| Lint all docs            | `~/.claude/lint.sh`            |
-| Lint and auto-fix        | `~/.claude/lint.sh --fix`      |
-| Lint specific directory  | `~/.claude/lint.sh src/`       |
+| Action                    | Command                        |
+|---------------------------|--------------------------------|
+| Lint all docs             | `~/.claude/lint.sh`            |
+| Lint and auto-fix         | `~/.claude/lint.sh --fix`      |
+| Lint specific directory   | `~/.claude/lint.sh src/`       |
 | Lint and fix specific dir | `~/.claude/lint.sh --fix src/` |
-| Lint current directory   | `~/.claude/lint.sh .`          |
+| Lint current directory    | `~/.claude/lint.sh .`          |
 
 The script auto-detects `.markdownlintrc` config (local first, then `~/.claude/`),
 finds all `.md` files recursively, and lints them in one pass.
