@@ -5,11 +5,11 @@ toolchain for Claude Code projects.
 
 ## Contents
 
-| Section | Description |
-|---------|-------------|
-| [Getting Started](01-getting-started/) | Installation, requirements, and first run |
-| [Usage](02-usage/) | Commands, linting, release notes, and workflows |
-| [Customization](03-customization/) | Linting rules, contexts, CI/CD integration |
+| Section                                    | Description                                        |
+|--------------------------------------------|----------------------------------------------------|
+| [Getting Started](01-getting-started/)     | Installation, requirements, and first run          |
+| [Usage](02-usage/)                         | Commands, linting, release notes, and workflows    |
+| [Customization](03-customization/)         | Linting rules, contexts, CI/CD integration         |
 
 ## Overview
 

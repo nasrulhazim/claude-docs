@@ -2,11 +2,11 @@
 
 ## Requirements
 
-| Requirement | Status |
-|-------------|--------|
-| Claude Code | Latest version (required) |
+| Requirement   | Status                                      |
+|---------------|---------------------------------------------|
+| Claude Code   | Latest version (required)                   |
 | Node.js & npm | For markdownlint (optional but recommended) |
-| Git | For cloning (manual install only) |
+| Git           | For cloning (manual install only)           |
 
 ## One-Line Install
 
@@ -41,11 +41,11 @@ curl -fsSL https://raw.githubusercontent.com/nasrulhazim/claude-docs/main/instal
 
 The installer copies these files to your `~/.claude` directory:
 
-| File | Location | Purpose |
-|------|----------|---------|
-| `docs-guidelines.md` | `~/.claude/` | Global documentation standards |
-| `.markdownlintrc` | `~/.claude/` | Markdown linting rules |
-| `docs.md` | `~/.claude/commands/` | `/docs` slash command |
-| `lint.sh` | `~/.claude/` | Batch markdown linter script |
-| `release-note.sh` | `~/.claude/` | Release note generator from git log |
-| `markdownlint-cli` | Global npm | Markdown linter (if npm available) |
+| File                   | Location                | Purpose                                |
+|------------------------|-------------------------|----------------------------------------|
+| `docs-guidelines.md`   | `~/.claude/`            | Global documentation standards         |
+| `.markdownlintrc`      | `~/.claude/`            | Markdown linting rules                 |
+| `docs.md`              | `~/.claude/commands/`   | `/docs` slash command                  |
+| `lint.sh`              | `~/.claude/`            | Batch markdown linter script           |
+| `release-note.sh`      | `~/.claude/`            | Release note generator from git log    |
+| `markdownlint-cli`     | Global npm              | Markdown linter (if npm available)     |

@@ -6,7 +6,8 @@
 
 ## Overview
 
-This document defines the standardized structure and conventions for project documentation across all projects. Following these standards ensures consistency, maintainability, and ease of navigation.
+This document defines the standardized structure and conventions for project documentation across all projects.
+Following these standards ensures consistency, maintainability, and ease of navigation.
 
 ## Core Principles
 
@@ -61,16 +62,16 @@ graph TD
 
 Common context folders (adjust priority numbering based on project):
 
-| Folder | Purpose | Typical Contents |
-|--------|---------|------------------|
-| `01-architecture/` | System design and patterns | overview, patterns, data-layer, components |
-| `02-development/` | Developer guides | getting-started, workflows, testing, debugging |
-| `03-deployment/` | Deployment and operations | environments, production, monitoring |
-| `04-api/` | API documentation | authentication, endpoints, webhooks |
-| `05-configuration/` | Configuration reference | env-vars, config-files, feature-flags |
-| `06-examples/` | Practical examples | real-world, use-cases, recipes |
-| `07-advanced/` | Advanced topics | optimization, scaling, custom-extensions |
-| `08-decisions/` | Architecture Decision Records | ADRs documenting key technical decisions |
+| Folder               | Purpose                       | Typical Contents                               |
+|----------------------|-------------------------------|------------------------------------------------|
+| `01-architecture/`   | System design and patterns    | overview, patterns, data-layer, components     |
+| `02-development/`    | Developer guides              | getting-started, workflows, testing, debugging |
+| `03-deployment/`     | Deployment and operations     | environments, production, monitoring           |
+| `04-api/`            | API documentation             | authentication, endpoints, webhooks            |
+| `05-configuration/`  | Configuration reference       | env-vars, config-files, feature-flags          |
+| `06-examples/`       | Practical examples            | real-world, use-cases, recipes                 |
+| `07-advanced/`       | Advanced topics               | optimization, scaling, custom-extensions       |
+| `08-decisions/`      | Architecture Decision Records | ADRs documenting key technical decisions       |
 
 ### Context Relationships
 
@@ -97,14 +98,15 @@ graph TB
 
 ### Folder Numbering Rules
 
-| Range | Priority | Description |
-|-------|----------|-------------|
-| 01-XX | Highest | Most important / frequently accessed content |
-| 02-XX | High | Essential for getting started |
-| 03-XX | Medium | Operational / deployment information |
-| 04-XX+ | Reference | Supplementary / reference material |
+| Range  | Priority  | Description                                 |
+|--------|-----------|---------------------------------------------|
+| 01-XX  | Highest   | Most important / frequently accessed content |
+| 02-XX  | High      | Essential for getting started               |
+| 03-XX  | Medium    | Operational / deployment information        |
+| 04-XX+ | Reference | Supplementary / reference material          |
 
-> **Note**: Use sequential numbering (01, 02, 03) not gap numbering (01, 05, 10) - this allows insertion of new folders between existing ones.
+> **Note**: Use sequential numbering (01, 02, 03) not gap numbering (01, 05, 10) - this allows insertion of new
+> folders between existing ones.
 
 ## File Naming Conventions
 
@@ -119,17 +121,17 @@ graph TB
 
 **Examples**:
 
-| Example | Valid | Reason |
-|---------|-------|--------|
-| `01-overview.md` | Yes | Correct format |
-| `02-getting-started.md` | Yes | Correct format |
-| `03-authentication.md` | Yes | Correct format |
-| `04-custom-generators.md` | Yes | Correct format |
-| `overview.md` | No | Missing number prefix |
-| `1-overview.md` | No | Single-digit prefix |
-| `01_overview.md` | No | Underscore separator |
-| `01-Overview.md` | No | Capitalized |
-| `01-gettingStarted.md` | No | camelCase |
+| Example                    | Valid | Reason                |
+|----------------------------|-------|-----------------------|
+| `01-overview.md`           | Yes   | Correct format        |
+| `02-getting-started.md`    | Yes   | Correct format        |
+| `03-authentication.md`     | Yes   | Correct format        |
+| `04-custom-generators.md`  | Yes   | Correct format        |
+| `overview.md`              | No    | Missing number prefix |
+| `1-overview.md`            | No    | Single-digit prefix   |
+| `01_overview.md`           | No    | Underscore separator  |
+| `01-Overview.md`           | No    | Capitalized           |
+| `01-gettingStarted.md`     | No    | camelCase             |
 
 ### Special Files
 
@@ -160,39 +162,39 @@ Each badge image **must** link to its relevant page (registry, actions, license 
 
 ##### Tier 1 -- Mandatory (All Projects)
 
-| Badge | Purpose | shields.io Pattern |
-|-------|---------|-------------------|
-| **Latest Version** | Current release | `github/v/release/{owner}/{repo}` |
-| **License** | License type | `github/license/{owner}/{repo}` |
-| **CI/Build Status** | Build health | `github/actions/workflow/status/{owner}/{repo}/{workflow}.yml` |
+| Badge               | Purpose         | shields.io Pattern                                             |
+|---------------------|-----------------|----------------------------------------------------------------|
+| **Latest Version**  | Current release | `github/v/release/{owner}/{repo}`                             |
+| **License**         | License type    | `github/license/{owner}/{repo}`                               |
+| **CI/Build Status** | Build health    | `github/actions/workflow/status/{owner}/{repo}/{workflow}.yml` |
 
 ##### Tier 2 -- Mandatory (Packages Only, by Registry)
 
 If the project is published to a package registry, add the registry-specific version and download badges:
 
-| Registry | Version Badge | Downloads Badge |
-|----------|--------------|-----------------|
-| **Packagist** (PHP/Composer) | `packagist/v/{vendor}/{package}` | `packagist/dm/{vendor}/{package}` |
-| **npm** (Node.js) | `npm/v/{package}` | `npm/dm/{package}` |
-| **PyPI** (Python) | `pypi/v/{package}` | `pypi/dm/{package}` |
-| **RubyGems** (Ruby) | `gem/v/{gem}` | `gem/dt/{gem}` |
-| **crates.io** (Rust) | `crates/v/{crate}` | `crates/d/{crate}` |
-| **NuGet** (.NET) | `nuget/v/{package}` | `nuget/dt/{package}` |
-| **Maven Central** (Java) | `maven-central/v/{groupId}/{artifactId}` | -- |
-| **Go Modules** (Go) | `github/v/release/{owner}/{repo}` | -- |
-| **Pub.dev** (Dart/Flutter) | `pub/v/{package}` | -- |
-| **Hex.pm** (Elixir) | `hexpm/v/{package}` | `hexpm/dt/{package}` |
+| Registry                     | Version Badge                              | Downloads Badge                   |
+|------------------------------|--------------------------------------------|-----------------------------------|
+| **Packagist** (PHP/Composer) | `packagist/v/{vendor}/{package}`           | `packagist/dm/{vendor}/{package}` |
+| **npm** (Node.js)            | `npm/v/{package}`                          | `npm/dm/{package}`                |
+| **PyPI** (Python)            | `pypi/v/{package}`                         | `pypi/dm/{package}`               |
+| **RubyGems** (Ruby)          | `gem/v/{gem}`                              | `gem/dt/{gem}`                    |
+| **crates.io** (Rust)         | `crates/v/{crate}`                         | `crates/d/{crate}`                |
+| **NuGet** (.NET)             | `nuget/v/{package}`                        | `nuget/dt/{package}`              |
+| **Maven Central** (Java)     | `maven-central/v/{groupId}/{artifactId}`   | --                                |
+| **Go Modules** (Go)          | `github/v/release/{owner}/{repo}`          | --                                |
+| **Pub.dev** (Dart/Flutter)   | `pub/v/{package}`                          | --                                |
+| **Hex.pm** (Elixir)          | `hexpm/v/{package}`                        | `hexpm/dt/{package}`              |
 
 ##### Tier 3 -- Recommended (Optional)
 
-| Badge | Purpose | shields.io Pattern |
-|-------|---------|-------------------|
-| **Code Coverage** | Test quality | `codecov/c/github/{owner}/{repo}` |
-| **PHP Version** | Compatibility | `packagist/dependency-v/{vendor}/{package}/php` |
-| **Node Version** | Compatibility | `node/v/{package}` |
-| **Python Version** | Compatibility | `pypi/pyversions/{package}` |
-| **Go Version** | Compatibility | `github/go-mod/go-version/{owner}/{repo}` |
-| **Rust MSRV** | Compatibility | `crates/msrv/{crate}` |
+| Badge              | Purpose       | shields.io Pattern                              |
+|--------------------|---------------|-------------------------------------------------|
+| **Code Coverage**  | Test quality  | `codecov/c/github/{owner}/{repo}`               |
+| **PHP Version**    | Compatibility | `packagist/dependency-v/{vendor}/{package}/php` |
+| **Node Version**   | Compatibility | `node/v/{package}`                              |
+| **Python Version** | Compatibility | `pypi/pyversions/{package}`                     |
+| **Go Version**     | Compatibility | `github/go-mod/go-version/{owner}/{repo}`       |
+| **Rust MSRV**      | Compatibility | `crates/msrv/{crate}`                           |
 
 ##### Badge Placement Rules
 
@@ -212,29 +214,29 @@ If the project is published to a package registry, add the registry-specific ver
 
 ##### Registry-Specific Badge Reference
 
-| Registry | Version Template | Downloads Template |
-|----------|-----------------|-------------------|
-| Packagist | `packagist/v/{vendor}/{package}` | `packagist/dt/{vendor}/{package}` |
-| npm | `npm/v/{package}` | `npm/dm/{package}` |
-| PyPI | `pypi/v/{package}` | `pypi/dm/{package}` |
-| RubyGems | `gem/v/{gem}` | `gem/dt/{gem}` |
-| crates.io | `crates/v/{crate}` | `crates/d/{crate}` |
-| NuGet | `nuget/v/{package}` | `nuget/dt/{package}` |
-| Maven Central | `maven-central/v/{groupId}/{artifactId}` | -- |
-| Go Modules | `github/v/release/{owner}/{repo}` | -- |
-| Pub.dev | `pub/v/{package}` | -- |
-| Hex.pm | `hexpm/v/{package}` | `hexpm/dt/{package}` |
+| Registry      | Version Template                          | Downloads Template                |
+|---------------|-------------------------------------------|-----------------------------------|
+| Packagist     | `packagist/v/{vendor}/{package}`          | `packagist/dt/{vendor}/{package}` |
+| npm           | `npm/v/{package}`                         | `npm/dm/{package}`                |
+| PyPI          | `pypi/v/{package}`                        | `pypi/dm/{package}`               |
+| RubyGems      | `gem/v/{gem}`                             | `gem/dt/{gem}`                    |
+| crates.io     | `crates/v/{crate}`                        | `crates/d/{crate}`                |
+| NuGet         | `nuget/v/{package}`                       | `nuget/dt/{package}`              |
+| Maven Central | `maven-central/v/{groupId}/{artifactId}`  | --                                |
+| Go Modules    | `github/v/release/{owner}/{repo}`         | --                                |
+| Pub.dev       | `pub/v/{package}`                         | --                                |
+| Hex.pm        | `hexpm/v/{package}`                       | `hexpm/dt/{package}`              |
 
 ##### Project Type Badge Matrix
 
-| Badge | PHP Pkg | npm Pkg | PyPI Pkg | Ruby Gem | Rust Crate | .NET Pkg | Java Pkg | Go Mod | Dart Pkg | Elixir Pkg | API | CLI | Full-Stack |
-|-------|:-------:|:-------:|:--------:|:--------:|:----------:|:--------:|:--------:|:------:|:--------:|:----------:|:---:|:---:|:----------:|
-| Version | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| License | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| CI Status | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| Registry Downloads | Yes | Yes | Yes | Yes | Yes | Yes | -- | -- | -- | Yes | -- | -- | -- |
-| Coverage | Rec | Rec | Rec | Rec | Rec | Rec | Rec | Rec | Rec | Rec | Rec | Rec | Rec |
-| Lang Version | Rec | Rec | Rec | -- | Rec | -- | -- | Rec | -- | -- | -- | -- | -- |
+| Badge              | PHP Pkg | npm Pkg | PyPI Pkg | Ruby Gem | Rust Crate | .NET Pkg | Java Pkg | Go Mod | Dart Pkg | Elixir Pkg | API | CLI | Full-Stack |
+|--------------------|:-------:|:-------:|:--------:|:--------:|:----------:|:--------:|:--------:|:------:|:--------:|:----------:|:---:|:---:|:----------:|
+| Version            |   Yes   |   Yes   |   Yes    |   Yes    |    Yes     |   Yes    |   Yes    |  Yes   |   Yes    |    Yes     | Yes | Yes |    Yes     |
+| License            |   Yes   |   Yes   |   Yes    |   Yes    |    Yes     |   Yes    |   Yes    |  Yes   |   Yes    |    Yes     | Yes | Yes |    Yes     |
+| CI Status          |   Yes   |   Yes   |   Yes    |   Yes    |    Yes     |   Yes    |   Yes    |  Yes   |   Yes    |    Yes     | Yes | Yes |    Yes     |
+| Registry Downloads |   Yes   |   Yes   |   Yes    |   Yes    |    Yes     |   Yes    |   --     |  --    |   --     |    Yes     | --  | --  |    --      |
+| Coverage           |   Rec   |   Rec   |   Rec    |   Rec    |    Rec     |   Rec    |   Rec    |  Rec   |   Rec    |    Rec     | Rec | Rec |    Rec     |
+| Lang Version       |   Rec   |   Rec   |   Rec    |   --     |    Rec     |   --     |   --     |  Rec   |   --     |    --      | --  | --  |    --      |
 
 > **Note**: "Yes" = mandatory, "Rec" = recommended, "--" = not applicable.
 
@@ -344,12 +346,12 @@ Every documentation page should follow this structure:
 
 ### Heading Hierarchy
 
-| Level | Syntax | Usage | Limit |
-|-------|--------|-------|-------|
-| H1 | `#` | Page title only | One per page |
-| H2 | `##` | Main sections | Unlimited |
-| H3 | `###` | Subsections | Unlimited |
-| H4 | `####` | Deep nesting | Use sparingly |
+| Level | Syntax | Usage           | Limit         |
+|-------|--------|-----------------|---------------|
+| H1    | `#`    | Page title only | One per page  |
+| H2    | `##`   | Main sections   | Unlimited     |
+| H3    | `###`  | Subsections     | Unlimited     |
+| H4    | `####` | Deep nesting    | Use sparingly |
 
 ### Content Guidelines
 
@@ -376,12 +378,12 @@ tags: [installation, setup, quickstart]
 ...
 ```
 
-| Field | Required | Purpose |
-|-------|----------|---------|
-| `title` | No | Display title (defaults to H1) |
-| `description` | No | Brief summary for index generation |
-| `last_updated` | No | Track freshness |
-| `tags` | No | Enable search and cross-referencing |
+| Field           | Required | Purpose                             |
+|-----------------|----------|-------------------------------------|
+| `title`         | No       | Display title (defaults to H1)      |
+| `description`   | No       | Brief summary for index generation  |
+| `last_updated`  | No       | Track freshness                     |
+| `tags`          | No       | Enable search and cross-referencing |
 
 ## Markdown Conventions
 
@@ -415,6 +417,7 @@ Use for:
 ### Lists
 
 **Ordered** for steps/sequences:
+
 ```markdown
 1. First step
 2. Second step
@@ -577,7 +580,8 @@ flowchart TD
 
 ### Markdown Linting
 
-This documentation standard includes automated linting using **markdownlint** to ensure consistency and catch common formatting issues.
+This documentation standard includes automated linting using **markdownlint** to ensure consistency and catch
+common formatting issues.
 
 #### Installation
 
@@ -591,49 +595,49 @@ npm install -g markdownlint-cli
 
 Linting rules are defined in `~/.claude/.markdownlintrc`:
 
-| Rule | Setting | Purpose |
-|------|---------|---------|
-| MD003 | `style: atx` | ATX-style headers (`#` syntax) |
-| MD004 | `style: dash` | Dash-style unordered lists (`-`) |
-| MD007 | `indent: 2` | 2-space indentation for lists |
-| MD013 | `line_length: 120` | 120 character line length (excludes code blocks and tables) |
-| MD024 | `siblings_only` | Allow duplicate headers in different sections |
-| MD025 | enabled | Single H1 per document |
-| MD033 | allowed HTML | Allow specific HTML elements (br, details, summary, kbd, sub, sup) |
-| MD040 | enabled | Language identifiers required in fenced code blocks |
-| MD041 | enabled | First line must be top-level header |
-| MD046 | `style: fenced` | Fenced code block style (backticks) |
-| MD048 | `style: backtick` | Code fence style (backticks, not tildes) |
+| Rule  | Setting             | Purpose                                                            |
+|-------|---------------------|--------------------------------------------------------------------|
+| MD003 | `style: atx`        | ATX-style headers (`#` syntax)                                     |
+| MD004 | `style: dash`       | Dash-style unordered lists (`-`)                                   |
+| MD007 | `indent: 2`         | 2-space indentation for lists                                      |
+| MD013 | `line_length: 120`  | 120 character line length (excludes code blocks and tables)        |
+| MD024 | `siblings_only`     | Allow duplicate headers in different sections                      |
+| MD025 | enabled             | Single H1 per document                                             |
+| MD033 | allowed HTML        | Allow specific HTML elements (br, details, summary, kbd, sub, sup) |
+| MD040 | enabled             | Language identifiers required in fenced code blocks                |
+| MD041 | enabled             | First line must be top-level header                                |
+| MD046 | `style: fenced`     | Fenced code block style (backticks)                                |
+| MD048 | `style: backtick`   | Code fence style (backticks, not tildes)                           |
 
 #### Running the Linter
 
 Use the included `lint.sh` script to lint all files in one pass:
 
-| Action | Command |
-|--------|---------|
-| Lint all docs | `~/.claude/lint.sh` |
-| Lint & auto-fix all docs | `~/.claude/lint.sh --fix` |
-| Lint specific directory | `~/.claude/lint.sh src/` |
-| Lint & auto-fix specific dir | `~/.claude/lint.sh --fix src/` |
-| Lint current directory | `~/.claude/lint.sh .` |
+| Action                        | Command                          |
+|-------------------------------|----------------------------------|
+| Lint all docs                 | `~/.claude/lint.sh`              |
+| Lint & auto-fix all docs      | `~/.claude/lint.sh --fix`        |
+| Lint specific directory       | `~/.claude/lint.sh src/`         |
+| Lint & auto-fix specific dir  | `~/.claude/lint.sh --fix src/`   |
+| Lint current directory        | `~/.claude/lint.sh .`            |
 
 Or run `markdownlint` directly for single files:
 
-| Action | Command |
-|--------|---------|
-| Lint specific file | `markdownlint docs/01-architecture/01-overview.md` |
-| Use custom config | `markdownlint --config ~/.claude/.markdownlintrc docs/**/*.md` |
+| Action             | Command                                                        |
+|--------------------|----------------------------------------------------------------|
+| Lint specific file | `markdownlint docs/01-architecture/01-overview.md`             |
+| Use custom config  | `markdownlint --config ~/.claude/.markdownlintrc docs/**/*.md` |
 
 #### Common Linting Issues
 
-| Issue | Rule | Solution |
-|-------|------|----------|
-| Missing language in code block | MD040 | Add language identifier: ` ```php ` |
-| Multiple H1 headers | MD025 | Use only one `#` title per file |
-| Inconsistent list markers | MD004 | Use `-` for all unordered lists |
-| Trailing spaces | MD009 | Remove spaces at end of lines |
-| Long lines | MD013 | Break lines at 120 characters (prose only) |
-| No blank lines around headers | MD022 | Add blank line before and after headers |
+| Issue                          | Rule  | Solution                                           |
+|--------------------------------|-------|----------------------------------------------------|
+| Missing language in code block | MD040 | Add language identifier: ` ```php `                |
+| Multiple H1 headers            | MD025 | Use only one `#` title per file                    |
+| Inconsistent list markers      | MD004 | Use `-` for all unordered lists                    |
+| Trailing spaces                | MD009 | Remove spaces at end of lines                      |
+| Long lines                     | MD013 | Break lines at 120 characters (prose only)         |
+| No blank lines around headers  | MD022 | Add blank line before and after headers            |
 
 #### Pre-commit Hook (Optional)
 
@@ -664,11 +668,11 @@ chmod +x .git/hooks/pre-commit
 
 #### IDE Integration
 
-| Editor | Plugin |
-|--------|--------|
-| VS Code | [markdownlint extension](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) |
-| Vim/Neovim | ALE or similar linter plugin |
-| JetBrains IDEs | Markdown Navigator plugin |
+| Editor          | Plugin                                                                                                        |
+|-----------------|---------------------------------------------------------------------------------------------------------------|
+| VS Code         | [markdownlint extension](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)  |
+| Vim/Neovim      | ALE or similar linter plugin                                                                                  |
+| JetBrains IDEs  | Markdown Navigator plugin                                                                                     |
 
 ### Quality Checklist with Linting
 
@@ -723,14 +727,14 @@ flowchart TD
     G -->|Yes| H[Done]
 ```
 
-| Step | Action | Command / Detail |
-|------|--------|------------------|
-| 1 | Audit current structure | List all existing docs, identify context groupings, determine priority |
-| 2 | Create numbered structure | `mkdir -p docs/{01-architecture,02-development,03-deployment}` |
-| 3 | Move and rename files | `mv docs/architecture.md docs/01-architecture/01-overview.md` |
-| 4 | Create README.md files | docs/README.md (main index) + each context folder README.md (TOC) |
-| 5 | Update cross-references | Change absolute paths to relative, update for new numbered structure |
-| 6 | Validate links | Test all internal links, ensure progressive flow |
+| Step | Action                    | Command / Detail                                                    |
+|------|---------------------------|---------------------------------------------------------------------|
+| 1    | Audit current structure   | List all existing docs, identify context groupings, determine priority |
+| 2    | Create numbered structure | `mkdir -p docs/{01-architecture,02-development,03-deployment}`      |
+| 3    | Move and rename files     | `mv docs/architecture.md docs/01-architecture/01-overview.md`       |
+| 4    | Create README.md files    | docs/README.md (main index) + each context folder README.md (TOC)  |
+| 5    | Update cross-references   | Change absolute paths to relative, update for new numbered structure |
+| 6    | Validate links            | Test all internal links, ensure progressive flow                    |
 
 ## Checklist
 
@@ -859,14 +863,14 @@ graph TD
 
 ### With Claude Code
 
-| Command | Description |
-|---------|-------------|
-| `/docs` | Create new documentation structure |
-| `/docs reorganize` | Reorganize existing docs following standards |
-| `/docs validate` | Validate docs and report issues |
-| `/docs update-toc` | Update all README.md TOCs |
-| `/docs health` | Generate documentation health report |
-| `/docs scaffold <type>` | Scaffold from template: `laravel`, `api`, `cli`, `sdk`, `fullstack` |
+| Command                  | Description                                                          |
+|--------------------------|----------------------------------------------------------------------|
+| `/docs`                  | Create new documentation structure                                   |
+| `/docs reorganize`       | Reorganize existing docs following standards                         |
+| `/docs validate`         | Validate docs and report issues                                      |
+| `/docs update-toc`       | Update all README.md TOCs                                            |
+| `/docs health`           | Generate documentation health report                                 |
+| `/docs scaffold <type>`  | Scaffold from template: `laravel`, `api`, `cli`, `sdk`, `fullstack`  |
 
 ### Manual Reference
 

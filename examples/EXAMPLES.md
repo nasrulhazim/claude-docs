@@ -457,11 +457,11 @@ Copy-paste badge templates for common project types. Replace placeholders
 
 ## Tips for Choosing Structure
 
-| Project Size | Doc Count | Recommended Structure |
-|-------------|-----------|----------------------|
-| Small | < 10 docs | Flat structure with numbered files directly in `docs/` |
-| Medium | 10-30 docs | 3-4 context folders |
-| Large | 30+ docs | 5-7+ context folders with clear separation |
+| Project Size | Doc Count   | Recommended Structure                                    |
+|--------------|-------------|----------------------------------------------------------|
+| Small        | < 10 docs   | Flat structure with numbered files directly in `docs/`   |
+| Medium       | 10-30 docs  | 3-4 context folders                                      |
+| Large        | 30+ docs    | 5-7+ context folders with clear separation               |
 
 ### Small Project Structure
 
@@ -478,23 +478,23 @@ graph TD
 
 ### Medium Project Contexts
 
-| Context | Purpose |
-|---------|---------|
-| `01-getting-started/` | Installation, setup, quickstart |
-| `02-guides/` | How-to guides and tutorials |
-| `03-api-reference/` | Technical reference documentation |
+| Context               | Purpose                            |
+|-----------------------|------------------------------------|
+| `01-getting-started/` | Installation, setup, quickstart    |
+| `02-guides/`          | How-to guides and tutorials        |
+| `03-api-reference/`   | Technical reference documentation  |
 
 ### Large Project Contexts
 
-| Context | Purpose |
-|---------|---------|
-| `01-introduction/` | Overview and onboarding |
-| `02-architecture/` | System design and decisions |
-| `03-development/` | Developer workflows and standards |
-| `04-deployment/` | Operations and infrastructure |
-| `05-api-reference/` | Technical API documentation |
-| `06-examples/` | Real-world usage examples |
-| `07-advanced/` | Deep-dive topics and optimization |
+| Context               | Purpose                            |
+|-----------------------|------------------------------------|
+| `01-introduction/`    | Overview and onboarding            |
+| `02-architecture/`    | System design and decisions        |
+| `03-development/`     | Developer workflows and standards  |
+| `04-deployment/`      | Operations and infrastructure      |
+| `05-api-reference/`   | Technical API documentation        |
+| `06-examples/`        | Real-world usage examples          |
+| `07-advanced/`        | Deep-dive topics and optimization  |
 
 ## Customizing for Your Project
 

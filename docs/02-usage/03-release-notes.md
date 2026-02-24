@@ -4,16 +4,16 @@ Generate release notes from the current repo's git log using `release-note.sh`.
 
 ## Quick Reference
 
-| Action | Command |
-|--------|---------|
-| Full release note (today) | `~/.claude/release-note.sh` |
-| TLDR version (today) | `~/.claude/release-note.sh --tldr` |
-| Since yesterday | `~/.claude/release-note.sh --since yesterday` |
-| Since specific date | `~/.claude/release-note.sh --since "2025-12-01"` |
-| Since last week | `~/.claude/release-note.sh --since "1 week ago"` |
-| Write to custom file | `~/.claude/release-note.sh --output RELEASE.md` |
-| Append to CHANGELOG.md | `~/.claude/release-note.sh --write` |
-| Write + TLDR | `~/.claude/release-note.sh --tldr --write` |
+| Action                    | Command                                              |
+|---------------------------|------------------------------------------------------|
+| Full release note (today) | `~/.claude/release-note.sh`                          |
+| TLDR version (today)      | `~/.claude/release-note.sh --tldr`                   |
+| Since yesterday           | `~/.claude/release-note.sh --since yesterday`        |
+| Since specific date       | `~/.claude/release-note.sh --since "2025-12-01"`     |
+| Since last week           | `~/.claude/release-note.sh --since "1 week ago"`     |
+| Write to custom file      | `~/.claude/release-note.sh --output RELEASE.md`      |
+| Append to CHANGELOG.md    | `~/.claude/release-note.sh --write`                  |
+| Write + TLDR              | `~/.claude/release-note.sh --tldr --write`           |
 
 ## Modes
 
@@ -30,17 +30,17 @@ flowchart LR
 
 Generates a comprehensive release note with:
 
-| Section | Content |
-|---------|---------|
-| Summary | Commit count, files changed, contributors table |
-| New Features | Commits matching `feat`, `add`, `new` prefixes |
-| Bug Fixes | Commits matching `fix`, `bug`, `patch` prefixes |
-| Documentation | Commits matching `docs` prefix |
-| Refactoring | Commits matching `refactor`, `clean`, `improve` prefixes |
-| Maintenance | Commits matching `chore`, `build`, `ci`, `deps` prefixes |
-| Other Changes | All remaining commits |
-| Contributors | List of authors |
-| Files Changed | Top 20 most-changed files with frequency |
+| Section       | Content                                                 |
+|---------------|---------------------------------------------------------|
+| Summary       | Commit count, files changed, contributors table         |
+| New Features  | Commits matching `feat`, `add`, `new` prefixes          |
+| Bug Fixes     | Commits matching `fix`, `bug`, `patch` prefixes         |
+| Documentation | Commits matching `docs` prefix                          |
+| Refactoring   | Commits matching `refactor`, `clean`, `improve` prefixes |
+| Maintenance   | Commits matching `chore`, `build`, `ci`, `deps` prefixes |
+| Other Changes | All remaining commits                                   |
+| Contributors  | List of authors                                         |
+| Files Changed | Top 20 most-changed files with frequency                |
 
 ### TLDR Mode
 
@@ -64,11 +64,11 @@ Behavior:
 
 ### Commit Category Mapping
 
-| Commit prefix | Changelog section |
-|---|---|
-| `feat`, `add`, `new` | `### Added` |
-| `fix`, `bug`, `patch` | `### Fixed` |
-| `docs`, `refactor`, `chore`, other | `### Changed` |
+| Commit prefix                       | Changelog section |
+|-------------------------------------|-------------------|
+| `feat`, `add`, `new`                | `### Added`       |
+| `fix`, `bug`, `patch`               | `### Fixed`       |
+| `docs`, `refactor`, `chore`, other  | `### Changed`     |
 
 ## Via Slash Command
 
